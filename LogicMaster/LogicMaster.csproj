@@ -7,4 +7,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="resources\images\background_placeholder.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\images\background_placeholder.png" />
+  </ItemGroup>
+
 </Project>
