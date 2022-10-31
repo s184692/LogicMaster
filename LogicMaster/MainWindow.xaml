@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:LogicMaster"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="LogicMaster" Height="800" Width="450" MinHeight="800" MinWidth="450" SizeToContent="Width">
+        Title="LogicMaster" Height="800" Width="450" MinHeight="800" MinWidth="450" SizeToContent="WidthAndHeight">
     <Window.Resources>
         <!--Color scheme-->
         <SolidColorBrush x:Key="MainGreen">#046307</SolidColorBrush>
@@ -18,6 +18,8 @@
         <SolidColorBrush x:Key="Layer2">#666666</SolidColorBrush>
         <SolidColorBrush x:Key="Layer3">#808080</SolidColorBrush>
         <ImageBrush x:Key="BackgroundImage" ImageSource="resources/images/background_placeholder.png" Stretch="Uniform" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 1024 1024"/>
+        <Image x:Key="ExitButtonImage" Source="resources/images/exit_button.png"/>
+        <Image x:Key="RestartButtonImage" Source="resources/images/restart_button.png"/>
         <!--Standard label style-->
         <Style x:Key="StandardLabel" TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -53,7 +55,7 @@
         </Style>
     </Window.Resources>
     <Grid x:Name="backgroundGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource BackgroundImage}">
-        <Grid x:Name="mainGrid" Width="450" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Stretch">
+        <Grid x:Name="mainGrid" Width="450" MinWidth="450" Height="Auto" HorizontalAlignment="Center" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
@@ -85,8 +87,8 @@
                             <RowDefinition Height="8*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-                        <Button Grid.Column="1" Grid.Row="1" x:Name="exitButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="X"/>
-                        <Button Grid.Column="3" Grid.Row="1" x:Name="restartButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="R"/>
+                        <Button Grid.Column="1" Grid.Row="1" x:Name="exitButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{StaticResource ExitButtonImage}" BorderThickness="0" Background="#00FFFFFF"/>
+                        <Button Grid.Column="3" Grid.Row="1" x:Name="restartButton" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{StaticResource RestartButtonImage}" BorderThickness="0" Background="#00FFFFFF"/>
                     </Grid>
                     <Border Grid.Column="1" Grid.Row="0" BorderBrush="{StaticResource Layer1}" BorderThickness="3 0 3 0" SnapsToDevicePixels="True">
                         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

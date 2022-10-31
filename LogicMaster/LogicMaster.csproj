@@ -9,10 +9,19 @@
 
   <ItemGroup>
     <None Remove="resources\images\background_placeholder.png" />
+    <None Remove="resources\images\exit_button.png" />
+    <None Remove="resources\images\restart_button.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="resources\images\background_placeholder.png" />
+    <Resource Include="resources\images\exit_button.png" />
+    <Resource Include="resources\images\restart_button.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="gui\controls\" />
+    <Folder Include="gui\pages\" />
   </ItemGroup>
 
 </Project>
