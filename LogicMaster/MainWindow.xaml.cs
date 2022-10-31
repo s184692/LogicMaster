@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicMaster.gui.pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +21,17 @@ namespace LogicMaster
     /// </summary>
     public partial class MainWindow : Window
     {
+        public double windowVerticalMarkup = 40;
+        public double windowHorizontalMarkup = 16;
         public double windowTargetAspectRatio;
         public double windowInitialMinWidth;
-        public double mainGridHeightRatio;
         public MainWindow()
         {
             InitializeComponent();
-            windowTargetAspectRatio = 9.0 / 16.0;
+            MinHeight = Height + windowVerticalMarkup;
+            MinWidth = Width + windowHorizontalMarkup;
+            windowTargetAspectRatio = MinWidth / MinHeight;
             windowInitialMinWidth = MinWidth;
-            mainGridHeightRatio = mainGrid.RowDefinitions[1].Height.Value / Height;
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
@@ -37,8 +40,16 @@ namespace LogicMaster
             targetWidth = targetWidth > windowInitialMinWidth ? targetWidth : windowInitialMinWidth;
             MinWidth = targetWidth + 16; //fix zeby nie dalo sie zmniejszyc okna za bardzo
             Width = targetWidth > sizeInfo.NewSize.Width ? targetWidth : sizeInfo.NewSize.Width;
-            mainGrid.Width = targetWidth;
-            mainGrid.RowDefinitions[1].Height = new GridLength(sizeInfo.NewSize.Height * mainGridHeightRatio);
+            contentFrame.Width = targetWidth;
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+            {
+                Height = MinHeight;
+                Width = MinHeight * windowTargetAspectRatio;
+            }
         }
     }
 }

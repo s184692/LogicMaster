@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <Folder Include="gui\controls\" />
-    <Folder Include="gui\pages\" />
   </ItemGroup>
 
 </Project>
