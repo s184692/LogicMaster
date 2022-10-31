@@ -38,7 +38,7 @@ namespace LogicMaster
         {
             double targetWidth = sizeInfo.NewSize.Height * windowTargetAspectRatio;
             targetWidth = targetWidth > windowInitialMinWidth ? targetWidth : windowInitialMinWidth;
-            MinWidth = targetWidth + 16; //fix zeby nie dalo sie zmniejszyc okna za bardzo
+            MinWidth = targetWidth + windowHorizontalMarkup; //fix zeby nie dalo sie zmniejszyc okna za bardzo
             Width = targetWidth > sizeInfo.NewSize.Width ? targetWidth : sizeInfo.NewSize.Width;
             contentFrame.Width = targetWidth;
         }

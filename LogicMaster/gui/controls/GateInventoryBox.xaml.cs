@@ -13,22 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LogicMaster.gui.pages
+namespace LogicMaster.gui.controls
 {
     /// <summary>
-    /// Interaction logic for Game.xaml
+    /// Interaction logic for GateInventoryBox.xaml
     /// </summary>
-    public partial class Game : Page
+    public partial class GateInventoryBox : UserControl
     {
-        public Game()
+        public GateInventoryBox()
         {
             InitializeComponent();
         }
-
-        //debug
-        //protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-        //{
-        //    levelLabel.Content = $"h: {DEBUG.ActualHeight}";
-        //}
     }
 }

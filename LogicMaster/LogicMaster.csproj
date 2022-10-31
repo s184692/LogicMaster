@@ -19,8 +19,4 @@
     <Resource Include="resources\images\restart_button.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="gui\controls\" />
-  </ItemGroup>
-
 </Project>

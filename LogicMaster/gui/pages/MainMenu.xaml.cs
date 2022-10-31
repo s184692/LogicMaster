@@ -16,19 +16,13 @@ using System.Windows.Shapes;
 namespace LogicMaster.gui.pages
 {
     /// <summary>
-    /// Interaction logic for Game.xaml
+    /// Interaction logic for MainMenu.xaml
     /// </summary>
-    public partial class Game : Page
+    public partial class MainMenu : Page
     {
-        public Game()
+        public MainMenu()
         {
             InitializeComponent();
         }
-
-        //debug
-        //protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-        //{
-        //    levelLabel.Content = $"h: {DEBUG.ActualHeight}";
-        //}
     }
 }
