@@ -8,6 +8,37 @@
       DataContext="{Binding RelativeSource={RelativeSource Self}}"
       Title="MainMenu" d:DesignHeight="800" d:DesignWidth="450">
 
+    <Page.Resources>
+        <!--Menu button style-->
+        <Style x:Key="MainMenuButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Foreground" Value="{StaticResource LightFontColor}"/>
+            <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="ButtonBorder" BorderThickness="4" BorderBrush="{StaticResource Layer1}" Background="{StaticResource Layer0}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="ButtonBorder" Value="{StaticResource Layer2}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.75"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource MainGreen}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -38,8 +69,8 @@
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Button Grid.Column="1" Grid.Row="0" x:Name="continueButton" Content="Continue" FontFamily="{StaticResource DefaultFontFamily}" FontSize="34" FontWeight="Bold" Foreground="{StaticResource LightFontColor}" Background="{StaticResource Layer0}" BorderThickness="4" BorderBrush="{StaticResource Layer1}"/>
-            <Button Grid.Column="1" Grid.Row="2" x:Name="newGameButton" Content="New Game" FontFamily="{StaticResource DefaultFontFamily}" FontSize="34" FontWeight="Bold" Foreground="{StaticResource LightFontColor}" Background="{StaticResource Layer0}" BorderThickness="4" BorderBrush="{StaticResource Layer1}"/>
+            <Button Grid.Column="1" Grid.Row="0" x:Name="continueButton" Content="Continue" Style="{StaticResource MainMenuButton}" Click="continueButton_Click" IsEnabled="False"/>
+            <Button Grid.Column="1" Grid.Row="2" x:Name="newGameButton" Content="New Game" Style="{StaticResource MainMenuButton}" Click="newGameButton_Click"/>
         </Grid>
         <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource Layer0}" BorderThickness="0 4 0 0" BorderBrush="{StaticResource Layer1}">
             <Label HorizontalAlignment="Right" VerticalAlignment="Center" Content="By Aleksandra Piąstka" VerticalContentAlignment="Center" FontFamily="{StaticResource DefaultFontFamily}" FontSize="18" FontWeight="Bold" Padding="10 10 10 10" Foreground="{StaticResource LightFontColor}"/>

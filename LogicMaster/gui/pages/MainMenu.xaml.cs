@@ -24,5 +24,17 @@ namespace LogicMaster.gui.pages
         {
             InitializeComponent();
         }
+
+        private void newGameButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+                mainWindow.StartNewGame();
+        }
+
+        private void continueButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

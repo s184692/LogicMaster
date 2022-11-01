@@ -41,8 +41,8 @@
                         <RowDefinition Height="8*"/>
                         <RowDefinition Height="1*"/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Column="1" Grid.Row="1" x:Name="exitButton" Style="{StaticResource StandardButton}" Content="{StaticResource ExitButtonImage}"/>
-                    <Button Grid.Column="3" Grid.Row="1" x:Name="restartButton" Style="{StaticResource StandardButton}" Content="{StaticResource RestartButtonImage}"/>
+                    <Button Grid.Column="1" Grid.Row="1" x:Name="exitButton" Style="{StaticResource StandardButton}" Content="{StaticResource ExitButtonImage}" Click="exitButton_Click"/>
+                    <Button Grid.Column="3" Grid.Row="1" x:Name="restartButton" Style="{StaticResource StandardButton}" Content="{StaticResource RestartButtonImage}" Click="restartButton_Click"/>
                 </Grid>
                 <Border Grid.Column="1" Grid.Row="0" BorderBrush="{StaticResource Layer1}" BorderThickness="3 0 3 0" SnapsToDevicePixels="True">
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">

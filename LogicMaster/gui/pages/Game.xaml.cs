@@ -25,10 +25,21 @@ namespace LogicMaster.gui.pages
             InitializeComponent();
         }
 
-        //debug
-        //protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-        //{
-        //    levelLabel.Content = $"h: {DEBUG.ActualHeight}";
-        //}
+        public void LoadNewGame()
+        {
+
+        }
+
+        private void exitButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+                mainWindow.LoadMainMenu();
+        }
+
+        private void restartButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

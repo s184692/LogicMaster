@@ -13,6 +13,6 @@
     </Window.Resources>
 
     <Grid x:Name="backgroundGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource BackgroundImage}">
-        <Frame x:Name="contentFrame" Width="450" HorizontalAlignment="Center" VerticalAlignment="Stretch" Source="/gui/pages/Game.xaml"/>
+        <Frame x:Name="contentFrame" Width="450" HorizontalAlignment="Center" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

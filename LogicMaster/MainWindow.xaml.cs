@@ -21,10 +21,14 @@ namespace LogicMaster
     /// </summary>
     public partial class MainWindow : Window
     {
-        public double windowVerticalMarkup = 40;
-        public double windowHorizontalMarkup = 16;
-        public double windowTargetAspectRatio;
-        public double windowInitialMinWidth;
+        //rozmiar okna jest większy o stałą wartość niż rozmiar treści
+        private double windowVerticalMarkup = 40;
+        private double windowHorizontalMarkup = 16;
+        private double windowTargetAspectRatio;
+        private double windowInitialMinWidth;
+        private MainMenu mainMenu { get; } = new MainMenu();
+        private Game game { get; } = new Game();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,13 +36,31 @@ namespace LogicMaster
             MinWidth = Width + windowHorizontalMarkup;
             windowTargetAspectRatio = MinWidth / MinHeight;
             windowInitialMinWidth = MinWidth;
+
+            LoadMainMenu();
+        }
+
+        public void LoadMainMenu()
+        {
+            contentFrame.Navigate(mainMenu);
+        }
+
+        public void StartNewGame()
+        {
+            contentFrame.Navigate(game);
+            game.LoadNewGame();
+        }
+
+        public void ContinueGame()
+        {
+
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             double targetWidth = sizeInfo.NewSize.Height * windowTargetAspectRatio;
             targetWidth = targetWidth > windowInitialMinWidth ? targetWidth : windowInitialMinWidth;
-            MinWidth = targetWidth + windowHorizontalMarkup; //fix zeby nie dalo sie zmniejszyc okna za bardzo
+            MinWidth = targetWidth + windowHorizontalMarkup;
             Width = targetWidth > sizeInfo.NewSize.Width ? targetWidth : sizeInfo.NewSize.Width;
             contentFrame.Width = targetWidth;
         }
