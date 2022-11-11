@@ -11,9 +11,19 @@
     <SolidColorBrush x:Key="Layer2">#FF666666</SolidColorBrush>
     <SolidColorBrush x:Key="Layer3">#FF808080</SolidColorBrush>
     <FontFamily x:Key="DefaultFontFamily">Arial Black</FontFamily>
+    
+    <!--Image paths-->
     <Image x:Key="ExitButtonImage" Source="/resources/images/exit_button.png"/>
     <Image x:Key="RestartButtonImage" Source="/resources/images/restart_button.png"/>
-    
+    <Image x:Key="andGateImage" Source="/resources/images/and.png"/>
+    <Image x:Key="nandGateImage" Source="/resources/images/nand.png"/>
+    <Image x:Key="orGateImage" Source="/resources/images/or.png"/>
+    <Image x:Key="norGateImage" Source="/resources/images/nor.png"/>
+    <Image x:Key="xorGateImage" Source="/resources/images/xor.png"/>
+    <Image x:Key="xnorGateImage" Source="/resources/images/xnor.png"/>
+    <Image x:Key="bufGateImage" Source="/resources/images/buf.png"/>
+    <Image x:Key="notGateImage" Source="/resources/images/not.png"/>
+
     <!--Standard label style-->
     <Style x:Key="StandardLabel" TargetType="Label">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>

@@ -4,23 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LogicMaster.gui.controls"
+             xmlns:conv="clr-namespace:LogicMaster.gui.converters"
              mc:Ignorable="d" 
              d:DesignWidth="100" d:DesignHeight="75">
 
-    <Border Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="True" Background="{StaticResource Layer3}" BorderBrush="{StaticResource Layer1}" BorderThickness="3" CornerRadius="8">
+    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="True" Background="{StaticResource Layer3}" BorderBrush="{StaticResource Layer1}" BorderThickness="3" CornerRadius="8">
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Column="1" Grid.Row="0" x:Name="titleLabel" Content="TITLE" FontSize="12" FontWeight="Bold" FontFamily="{StaticResource DefaultFontFamily}" Style="{StaticResource StandardLabel}" Foreground="{StaticResource DarkFontColor}"/>
-            <Grid Grid.Column="2" Grid.Row="0">
+            <Border Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" BorderThickness="0 0 1.5 0" BorderBrush="{StaticResource Layer1}"/>
+            <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" BorderThickness="1.5 0 0 0" BorderBrush="{StaticResource Layer1}" Background="{StaticResource Layer2}" CornerRadius="0 6 6 0"/>
+            <Label Grid.Column="0" Grid.Row="0" x:Name="titleLabel" Content="TITLE" FontSize="20" FontWeight="Bold" FontFamily="{StaticResource DefaultFontFamily}" Style="{StaticResource StandardLabel}" Foreground="{StaticResource DarkFontColor}"/>
+            <Grid Grid.Column="2" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="8*"/>
@@ -36,7 +38,7 @@
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                 <Ellipse Fill="{StaticResource InfoBlue}"/>
-                                <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="i" FontSize="12" FontFamily="Times New Roman" FontWeight="Bold" FontStyle="Italic" Foreground="{StaticResource LightFontColor}" Padding="0 0 0 0"/>
+                                <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="i" FontSize="16" FontFamily="Times New Roman" FontWeight="Bold" FontStyle="Italic" Foreground="{StaticResource LightFontColor}" Padding="0 0 0 0"/>
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -47,8 +49,18 @@
                     </Button.Template>
                 </Button>
             </Grid>
-            <Grid Grid.Column="1" Grid.Row="1" x:Name="gateContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <Label Grid.Column="2" Grid.Row="2" x:Name="amountLabel" Content="0x" FontSize="13" FontWeight="Bold" Style="{StaticResource StandardLabel}" Foreground="{StaticResource DarkFontColor}"/>
+            <Grid Grid.Column="0" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="1" Grid.Row="0" x:Name="gateContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            </Grid>
+            <Label Grid.Column="2" Grid.Row="2" x:Name="amountLabel" Content="10x" FontSize="13" FontWeight="Bold" Style="{StaticResource StandardLabel}" Foreground="{StaticResource DarkFontColor}"/>
         </Grid>
     </Border>
 </UserControl>

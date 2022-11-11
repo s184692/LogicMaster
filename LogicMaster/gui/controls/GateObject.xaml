@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="LogicMaster.gui.controls.GateObject"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LogicMaster.gui.controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="50" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+    <Image x:Name="gateImage" Source="/resources/images/exit_button.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform"/>
+</UserControl>

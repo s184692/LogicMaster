@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="LogicMaster.gui.controls.GateContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LogicMaster.gui.controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="50" AllowDrop="True">
+    <Border Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="True" Background="{StaticResource Layer3}" BorderBrush="{StaticResource Layer1}" BorderThickness="3" CornerRadius="8">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="18*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="18*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Column="1" Grid.Row="1" x:Name="gateImageContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Grid>
+    </Border>
+</UserControl>

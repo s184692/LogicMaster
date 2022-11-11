@@ -56,7 +56,7 @@
                             <RowDefinition Height="4*"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-                        <ProgressBar Grid.Column="1" Grid.Row="1" x:Name="levelProgressBar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                        <ProgressBar Grid.Column="1" Grid.Row="1" x:Name="levelProgressBar" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Minimum="0" Maximum="1"/>
                         <Label Grid.Column="1" Grid.Row="1" x:Name="levelLabel" Content="GAME#123456789" Style="{StaticResource StandardLabel}" FontSize="18" FontFamily="{StaticResource DefaultFontFamily}" Foreground="{StaticResource DarkFontColor}"/>
                     </Grid>
                 </Border>
@@ -76,7 +76,7 @@
             </Grid>
         </Border>
         <Grid Grid.Column="0" Grid.Row="1" x:Name="gameGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource MainGreen}" SnapsToDevicePixels="True">
-
+            <control:GateContainer Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Border Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{StaticResource Layer1}" BorderThickness="0 3 0 0" SnapsToDevicePixels="True">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource Layer0}">
@@ -98,14 +98,14 @@
                     <RowDefinition Height="8*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <control:GateInventoryBox Grid.Column="1" Grid.Row="1"/>
-                <control:GateInventoryBox Grid.Column="1" Grid.Row="3"/>
-                <control:GateInventoryBox Grid.Column="3" Grid.Row="1"/>
-                <control:GateInventoryBox Grid.Column="3" Grid.Row="3"/>
-                <control:GateInventoryBox Grid.Column="5" Grid.Row="1"/>
-                <control:GateInventoryBox Grid.Column="5" Grid.Row="3"/>
-                <control:GateInventoryBox Grid.Column="7" Grid.Row="1"/>
-                <control:GateInventoryBox Grid.Column="7" Grid.Row="3"/>
+                <control:GateInventoryBox Grid.Column="1" Grid.Row="1" x:Name="notGateContainer"/>
+                <control:GateInventoryBox Grid.Column="1" Grid.Row="3" x:Name="bufGateContainer"/>
+                <control:GateInventoryBox Grid.Column="3" Grid.Row="1" x:Name="andGateContainer"/>
+                <control:GateInventoryBox Grid.Column="3" Grid.Row="3" x:Name="nandGateContainer"/>
+                <control:GateInventoryBox Grid.Column="5" Grid.Row="1" x:Name="orGateContainer"/>
+                <control:GateInventoryBox Grid.Column="5" Grid.Row="3" x:Name="norGateContainer"/>
+                <control:GateInventoryBox Grid.Column="7" Grid.Row="1" x:Name="xorGateContainer"/>
+                <control:GateInventoryBox Grid.Column="7" Grid.Row="3" x:Name="xnorGateContainer"/>
             </Grid>
         </Border>
     </Grid>
