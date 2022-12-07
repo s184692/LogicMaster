@@ -36,5 +36,12 @@ namespace LogicMaster.gui.pages
         {
 
         }
+
+        private void quitButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+                mainWindow.Close();
+        }
     }
 }
