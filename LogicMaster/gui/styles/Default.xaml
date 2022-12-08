@@ -3,6 +3,7 @@
     
     <!--Color scheme-->
     <SolidColorBrush x:Key="MainGreen">#FF046307</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryGreen">#FF094D1C</SolidColorBrush>
     <SolidColorBrush x:Key="InfoBlue">#FF00CCFF</SolidColorBrush>
     <SolidColorBrush x:Key="DarkFontColor">#FF1A1A1A</SolidColorBrush>
     <SolidColorBrush x:Key="LightFontColor">#FFD9D9D9</SolidColorBrush>

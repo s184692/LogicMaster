@@ -39,19 +39,31 @@
         </Style>
     </Page.Resources>
 
-    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource MainGreen}">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource SecondaryGreen}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="8*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="5*"/>
             <RowDefinition Height="10*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="70*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="48*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Image Source="/resources/images/logo.png" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="18*"/>
@@ -66,14 +78,12 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Button Grid.Column="1" Grid.Row="0" x:Name="continueButton" Content="Continue" Style="{StaticResource MainMenuButton}" Click="continueButton_Click" IsEnabled="False"/>
             <Button Grid.Column="1" Grid.Row="2" x:Name="newGameButton" Content="New Game" Style="{StaticResource MainMenuButton}" Click="newGameButton_Click"/>
-            <Button Grid.Column="1" Grid.Row="8" x:Name="quitButton" Content="Quit" Style="{StaticResource MainMenuButton}" Click="quitButton_Click"/>
+            <Button Grid.Column="1" Grid.Row="6" x:Name="quitButton" Content="Quit" Style="{StaticResource MainMenuButton}" Click="quitButton_Click"/>
         </Grid>
-        <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource Layer0}" BorderThickness="0 4 0 0" BorderBrush="{StaticResource Layer1}">
+        <Border Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource Layer0}" BorderThickness="0 4 0 0" BorderBrush="{StaticResource Layer1}">
             <Label HorizontalAlignment="Right" VerticalAlignment="Center" Content="By Aleksandra Piąstka" VerticalContentAlignment="Center" FontFamily="{StaticResource DefaultFontFamily}" FontSize="18" FontWeight="Bold" Padding="10 10 10 10" Foreground="{StaticResource LightFontColor}"/>
         </Border>
     </Grid>

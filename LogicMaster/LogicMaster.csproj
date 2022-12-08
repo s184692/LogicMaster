@@ -9,9 +9,10 @@
 
   <ItemGroup>
     <None Remove="resources\images\and.png" />
-    <None Remove="resources\images\background_placeholder.png" />
+    <None Remove="resources\images\background.png" />
     <None Remove="resources\images\buf.png" />
     <None Remove="resources\images\exit_button.png" />
+    <None Remove="resources\images\logo.png" />
     <None Remove="resources\images\nand.png" />
     <None Remove="resources\images\nor.png" />
     <None Remove="resources\images\not.png" />
@@ -23,13 +24,12 @@
 
   <ItemGroup>
     <Resource Include="resources\images\and.png" />
-    <Resource Include="resources\images\background_placeholder.png">
-      <CopyToOutputDirectory></CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="resources\images\background.png" />
     <Resource Include="resources\images\buf.png" />
     <Resource Include="resources\images\exit_button.png">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Resource>
+    <Resource Include="resources\images\logo.png" />
     <Resource Include="resources\images\nand.png" />
     <Resource Include="resources\images\nor.png" />
     <Resource Include="resources\images\not.png" />

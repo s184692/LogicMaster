@@ -75,7 +75,7 @@
                 </Grid>
             </Grid>
         </Border>
-        <Grid Grid.Column="0" Grid.Row="1" x:Name="gameGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource MainGreen}" SnapsToDevicePixels="True">
+        <Grid Grid.Column="0" Grid.Row="1" x:Name="gameGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource SecondaryGreen}" SnapsToDevicePixels="True">
             <control:GateContainer Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Grid>
         <Border Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{StaticResource Layer1}" BorderThickness="0 3 0 0" SnapsToDevicePixels="True">
