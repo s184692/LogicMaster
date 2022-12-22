@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!--Color scheme-->
+    <SolidColorBrush x:Key="MainGreen">#FF046307</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryGreen">#FF094D1C</SolidColorBrush>
+    <SolidColorBrush x:Key="InfoBlue">#FF00CCFF</SolidColorBrush>
+    <SolidColorBrush x:Key="DarkFontColor">#FF1A1A1A</SolidColorBrush>
+    <SolidColorBrush x:Key="LightFontColor">#FFD9D9D9</SolidColorBrush>
+    <SolidColorBrush x:Key="Layer0">#FF262626</SolidColorBrush>
+    <SolidColorBrush x:Key="Layer1">#FF404040</SolidColorBrush>
+    <SolidColorBrush x:Key="Layer2">#FF666666</SolidColorBrush>
+    <SolidColorBrush x:Key="Layer3">#FF808080</SolidColorBrush>
+    <FontFamily x:Key="DefaultFontFamily">Arial Black</FontFamily>
+    
+    <!--Image paths-->
+    <Image x:Key="ExitButtonImage" Source="/resources/images/exit_button.png"/>
+    <Image x:Key="RestartButtonImage" Source="/resources/images/restart_button.png"/>
+    <Image x:Key="andGateImage" Source="/resources/images/and.png"/>
+    <Image x:Key="nandGateImage" Source="/resources/images/nand.png"/>
+    <Image x:Key="orGateImage" Source="/resources/images/or.png"/>
+    <Image x:Key="norGateImage" Source="/resources/images/nor.png"/>
+    <Image x:Key="xorGateImage" Source="/resources/images/xor.png"/>
+    <Image x:Key="xnorGateImage" Source="/resources/images/xnor.png"/>
+    <Image x:Key="bufGateImage" Source="/resources/images/buf.png"/>
+    <Image x:Key="notGateImage" Source="/resources/images/not.png"/>
+
+    <!--Standard label style-->
+    <Style x:Key="StandardLabel" TargetType="Label">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="0 0 0 0"/>
+        <Setter Property="Foreground" Value="{StaticResource DarkFontColor}"/>
+        <Setter Property="FontFamily" Value="Tunga"/>
+    </Style>
+    
+    <!--Standard button style-->
+    <Style x:Key="StandardButton" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="#00FFFFFF"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border BorderThickness="0" BorderBrush="{StaticResource Layer1}" Background="#00FFFFFF">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Opacity" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

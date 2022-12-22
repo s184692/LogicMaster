@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LogicMaster"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="LogicMaster" Height="800" Width="450" MinHeight="800" MinWidth="450" SizeToContent="WidthAndHeight" StateChanged="Window_StateChanged">
+    
+    <Window.Resources>
+        <ImageBrush x:Key="BackgroundImage" ImageSource="/resources/images/background.png" Stretch="Uniform" TileMode="Tile" ViewportUnits="Absolute" Viewport="0 0 512 512"/>
+    </Window.Resources>
 
+    <Grid x:Name="backgroundGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource BackgroundImage}">
+        <Frame x:Name="contentFrame" Width="450" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>

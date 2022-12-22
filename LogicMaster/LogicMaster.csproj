@@ -7,4 +7,38 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="resources\images\and.png" />
+    <None Remove="resources\images\background.png" />
+    <None Remove="resources\images\buf.png" />
+    <None Remove="resources\images\exit_button.png" />
+    <None Remove="resources\images\logo.png" />
+    <None Remove="resources\images\nand.png" />
+    <None Remove="resources\images\nor.png" />
+    <None Remove="resources\images\not.png" />
+    <None Remove="resources\images\or.png" />
+    <None Remove="resources\images\restart_button.png" />
+    <None Remove="resources\images\xnor.png" />
+    <None Remove="resources\images\xor.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="resources\images\and.png" />
+    <Resource Include="resources\images\background.png" />
+    <Resource Include="resources\images\buf.png" />
+    <Resource Include="resources\images\exit_button.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\logo.png" />
+    <Resource Include="resources\images\nand.png" />
+    <Resource Include="resources\images\nor.png" />
+    <Resource Include="resources\images\not.png" />
+    <Resource Include="resources\images\or.png" />
+    <Resource Include="resources\images\restart_button.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="resources\images\xnor.png" />
+    <Resource Include="resources\images\xor.png" />
+  </ItemGroup>
+
 </Project>
