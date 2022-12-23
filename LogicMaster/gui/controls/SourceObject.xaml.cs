@@ -17,22 +17,23 @@ using System.Windows.Shapes;
 namespace LogicMaster.gui.controls
 {
     /// <summary>
-    /// Interaction logic for GateInventoryBox.xaml
+    /// Interaction logic for SourceObject.xaml
     /// </summary>
-    public partial class GateInventoryBox : UserControl
+    public partial class SourceObject : UserControl
     {
-        public GateInventoryBox()
+        private LogicSource? logicSource;
+
+        public SourceObject()
         {
             InitializeComponent();
+            logicSource = null;
         }
 
-        public GateInventoryBox(LogicGate gate, int column, int row)
+        public SourceObject(LogicSource source)
         {
             InitializeComponent();
-            Grid.SetColumn(this, column);
-            Grid.SetRow(this, row);
-            titleLabel.Content = gate.Name;
-            gateContainer.Children.Add(new GateObject(gate));
+            logicSource = source;
+            sourceLight.Fill = source.ActiveColor;
         }
     }
 }

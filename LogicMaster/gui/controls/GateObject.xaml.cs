@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicMaster.gameplay;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,21 +21,19 @@ namespace LogicMaster.gui.controls
     /// </summary>
     public partial class GateObject : UserControl
     {
+        private LogicGate? logicGate;
+
         public GateObject()
         {
             InitializeComponent();
+            logicGate = null;
         }
 
-        public GateObject(Image img)
+        public GateObject(LogicGate gate)
         {
             InitializeComponent();
-            gateImage.Source = img.Source;
-        }
-
-        public GateObject(GateObject go)
-        {
-            InitializeComponent();
-            gateImage.Source = go.gateImage.Source;
+            logicGate = gate;
+            gateImage.Source = new BitmapImage(gate.ImageURI);
         }
 
         protected override void OnMouseMove(MouseEventArgs e)

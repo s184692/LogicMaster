@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogicMaster.gameplay
 {
-    internal abstract class LogicElement
+    public abstract class LogicElement
     {
         public abstract bool State { get; }
         public abstract void HandleSignal();

@@ -23,9 +23,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="resources\images\and.png" />
+    <Resource Include="resources\images\and.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
     <Resource Include="resources\images\background.png" />
-    <Resource Include="resources\images\buf.png" />
+    <Resource Include="resources\images\buf.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
     <Resource Include="resources\images\exit_button.png">
       <CopyToOutputDirectory></CopyToOutputDirectory>
     </Resource>

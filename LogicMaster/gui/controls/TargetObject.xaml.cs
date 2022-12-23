@@ -1,5 +1,4 @@
-﻿using LogicMaster.gameplay;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,22 +16,13 @@ using System.Windows.Shapes;
 namespace LogicMaster.gui.controls
 {
     /// <summary>
-    /// Interaction logic for GateInventoryBox.xaml
+    /// Interaction logic for TargetObject.xaml
     /// </summary>
-    public partial class GateInventoryBox : UserControl
+    public partial class TargetObject : UserControl
     {
-        public GateInventoryBox()
+        public TargetObject()
         {
             InitializeComponent();
-        }
-
-        public GateInventoryBox(LogicGate gate, int column, int row)
-        {
-            InitializeComponent();
-            Grid.SetColumn(this, column);
-            Grid.SetRow(this, row);
-            titleLabel.Content = gate.Name;
-            gateContainer.Children.Add(new GateObject(gate));
         }
     }
 }

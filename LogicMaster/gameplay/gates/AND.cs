@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogicMaster.gameplay.gates
 {
-    internal class AND : LogicGate
+    public class AND : LogicGate
     {
         public override string Name 
         { 
@@ -16,7 +16,8 @@ namespace LogicMaster.gameplay.gates
             } 
         }
 
-        public override bool[] TruthTable {
+        public override bool[] TruthTable 
+        {
             get
             {
                 return new bool[] { false, false, false, true };
@@ -27,7 +28,7 @@ namespace LogicMaster.gameplay.gates
         {
             get
             {
-                return new Uri("/resources/images/and.png");
+                return new Uri("/resources/images/and.png", UriKind.Relative);
             }
         }
     }

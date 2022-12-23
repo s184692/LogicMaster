@@ -16,12 +16,12 @@ using System.Windows.Shapes;
 namespace LogicMaster.gui.controls
 {
     /// <summary>
-    /// Interaction logic for GateContainer.xaml
+    /// Interaction logic for LogicContainer.xaml
     /// </summary>
-    public partial class GateContainer : UserControl
+    public partial class LogicContainer : UserControl
     {
         private ImageSource? _previous = null;
-        public GateContainer()
+        public LogicContainer()
         {
             InitializeComponent();
         }

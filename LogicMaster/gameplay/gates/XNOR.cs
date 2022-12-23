@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogicMaster.gameplay.gates
 {
-    internal class XNOR : LogicGate
+    public class XNOR : LogicGate
     {
         public override string Name
         {
@@ -28,7 +28,7 @@ namespace LogicMaster.gameplay.gates
         {
             get
             {
-                return new Uri("/resources/images/xnor.png");
+                return new Uri("/resources/images/xnor.png", UriKind.Relative);
             }
         }
     }

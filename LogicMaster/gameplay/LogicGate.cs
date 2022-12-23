@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace LogicMaster.gameplay
 {
-    internal abstract class LogicGate : LogicElement
+    public abstract class LogicGate : LogicElement
     {
         public abstract string Name { get; }
 

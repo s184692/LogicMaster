@@ -3,14 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace LogicMaster.gameplay
 {
-    internal class LogicTarget : LogicElement
+    public class LogicTarget : LogicElement
     {
         private bool active;
 
         private LogicElement? inputElement;
+
+        public SolidColorBrush ActiveColor
+        {
+            get
+            {
+                if (active)
+                {
+                    return new SolidColorBrush(Color.FromRgb(255, 255, 0));
+                }
+                else
+                {
+                    return new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                }
+            }
+        }
 
         public override bool State
         {
