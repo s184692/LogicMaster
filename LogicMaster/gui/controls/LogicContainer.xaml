@@ -18,7 +18,8 @@
                 <RowDefinition Height="18*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Image Grid.Column="1" Grid.Row="1" x:Name="gateImageContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Image Grid.Column="1" Grid.Row="1" x:Name="imageContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Grid Grid.Column="1" Grid.Row="1" x:Name="objectContainer" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         </Grid>
     </Border>
 </UserControl>

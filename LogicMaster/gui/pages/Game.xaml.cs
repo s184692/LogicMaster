@@ -1,4 +1,5 @@
-﻿using LogicMaster.gameplay.gates;
+﻿using LogicMaster.gameplay;
+using LogicMaster.gameplay.gates;
 using LogicMaster.gui.controls;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,42 @@ namespace LogicMaster.gui.pages
             inventoryGrid.Children.Add(new GateInventoryBox(new NOR(), 5, 3));
             inventoryGrid.Children.Add(new GateInventoryBox(new XOR(), 7, 1));
             inventoryGrid.Children.Add(new GateInventoryBox(new XNOR(), 7, 3));
+
+            LogicTarget lt1 = new LogicTarget();
+            LogicSource ls1 = new LogicSource(true);
+            LogicSource ls2 = new LogicSource(false);
+
+            LogicContainer lc1 = new LogicContainer(lt1);
+            LogicContainer lc2 = new LogicContainer();
+            LogicContainer lc3 = new LogicContainer(ls1);
+            LogicContainer lc4 = new LogicContainer(ls2);
+
+            lc3.ConnectTo(lc2);
+            lc4.ConnectTo(lc2);
+            lc2.ConnectTo(lc1);
+
+            lc1.Width = 40.0;
+            lc2.Width = 40.0;
+            lc3.Width = 40.0;
+            lc4.Width = 40.0;
+            lc1.Height = 40.0;
+            lc2.Height = 40.0;
+            lc3.Height = 40.0;
+            lc4.Height = 40.0;
+
+            Canvas.SetLeft(lc1, 205.0);
+            Canvas.SetLeft(lc2, 205.0);
+            Canvas.SetLeft(lc3, 175.0);
+            Canvas.SetLeft(lc4, 235.0);
+            Canvas.SetTop(lc1, 100.0);
+            Canvas.SetTop(lc2, 200.0);
+            Canvas.SetTop(lc3, 300.0);
+            Canvas.SetTop(lc4, 300.0);
+
+            gameCanvas.Children.Add(lc1);
+            gameCanvas.Children.Add(lc2);
+            gameCanvas.Children.Add(lc3);
+            gameCanvas.Children.Add(lc4);
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)

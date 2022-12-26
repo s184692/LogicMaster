@@ -1,5 +1,7 @@
-﻿using System;
+﻿using LogicMaster.gameplay;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,10 +22,81 @@ namespace LogicMaster.gui.controls
     /// </summary>
     public partial class LogicContainer : UserControl
     {
-        private ImageSource? _previous = null;
+        public LogicElement? logicElement { get; private set; }
+
+        private List<LogicContainer> inputLogicContainers = new List<LogicContainer>();
+
+        private List<LogicContainer> outputLogicContainers = new List<LogicContainer>();
+
+        private ImageSource? previous = null;
+
         public LogicContainer()
         {
             InitializeComponent();
+            AllowDrop = true;
+        }
+
+        public LogicContainer(LogicElement element)
+        {
+            InitializeComponent();
+            logicElement = element;
+            AllowDrop = false;
+            switch(logicElement)
+            {
+                case LogicGate logicGate:
+                    imageContainer.Source = new BitmapImage(logicGate.ImageURI);
+                    break;
+                case LogicSource logicSource:
+                    objectContainer.Children.Add(new SourceObject(logicSource));
+                    break;
+                case LogicTarget logicTarget:
+                    objectContainer.Children.Add(new TargetObject(logicTarget));
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void ConnectTo(LogicContainer container, bool asInput = true)
+        {
+            if (asInput)
+            {
+                this.outputLogicContainers.Add(container);
+                container.inputLogicContainers.Add(this);
+            }
+            else
+            {
+                this.inputLogicContainers.Add(container);
+                container.outputLogicContainers.Add(this);
+            }
+        }
+
+        private void SetAndAttachLogicElement(LogicElement element)
+        {
+            logicElement = element;
+            foreach (LogicContainer lc in inputLogicContainers)
+            {
+                if (lc.logicElement != null)
+                {
+                    lc.logicElement.AttachTo(logicElement);
+                }
+            }
+            foreach (LogicContainer lc in outputLogicContainers)
+            {
+                if (lc.logicElement != null)
+                {
+                    logicElement.AttachTo(lc.logicElement);
+                }
+            }
+        }
+
+        private void DetachAndRemoveLogicElement()
+        {
+            if (logicElement != null)
+            {
+                logicElement.DetachAll();
+                logicElement = null;
+            }
         }
 
         protected override void OnDrop(DragEventArgs e)
@@ -34,8 +107,12 @@ namespace LogicMaster.gui.controls
             {
                 if ((Type)e.Data.GetData("Type") == typeof(GateObject))
                 {
-                    gateImageContainer.Source = (ImageSource)e.Data.GetData("Source");
-                    gateImageContainer.Opacity = 1.0;
+                    LogicGate logicGate = (LogicGate)e.Data.GetData("LogicGate");
+                    DetachAndRemoveLogicElement();
+                    SetAndAttachLogicElement(logicGate);
+
+                    imageContainer.Source = new BitmapImage(logicGate.ImageURI);
+                    imageContainer.Opacity = 1.0;
                     e.Effects = DragDropEffects.Copy;
                 }
             }
@@ -47,14 +124,15 @@ namespace LogicMaster.gui.controls
         {
             base.OnDragEnter(e);
 
-            _previous = gateImageContainer.Source;
+            previous = imageContainer.Source;
 
             if (e.Data.GetDataPresent("Type"))
             {
                 if ((Type)e.Data.GetData("Type") == typeof(GateObject))
                 {
-                    gateImageContainer.Source = (ImageSource)e.Data.GetData("Source");
-                    gateImageContainer.Opacity = 0.5;
+                    LogicGate logicGate = (LogicGate)e.Data.GetData("LogicGate");
+                    imageContainer.Source = new BitmapImage(logicGate.ImageURI);
+                    imageContainer.Opacity = 0.5;
                     e.Effects = DragDropEffects.Copy;
                 }
             }
@@ -66,9 +144,9 @@ namespace LogicMaster.gui.controls
         {
             base.OnDragLeave(e);
 
-            gateImageContainer.Source = _previous;
-            gateImageContainer.Opacity = 1.0;
-            _previous = null;
+            imageContainer.Source = previous;
+            imageContainer.Opacity = 1.0;
+            previous = null;
         }
     }
 }

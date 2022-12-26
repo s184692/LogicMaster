@@ -16,9 +16,9 @@ namespace LogicMaster.gameplay
 
         public abstract Uri ImageURI { get; }
 
-        protected readonly LogicElement?[] inputElements;
+        protected LogicElement?[] inputElements;
 
-        protected LogicElement? outputElement;
+        protected List<LogicElement> outputElements = new List<LogicElement>();
 
         protected bool output;
 
@@ -34,21 +34,19 @@ namespace LogicMaster.gameplay
         {
             output = GetOutputLogic();
 
-            if (outputElement != null)
+
+            foreach (LogicElement logicElement in outputElements)
             {
-                outputElement.HandleSignal();
+                logicElement.HandleSignal();
             }
         }
 
         public override void AttachTo(LogicElement element)
         {
-            if (outputElement == null)
+            if (element.HandleAttachment(this))
             {
-                if (element.HandleAttachment(this))
-                {
-                    outputElement = element;
-                    outputElement.HandleSignal();
-                }
+                outputElements.Add(element);
+                element.HandleSignal();
             }
         }
 
@@ -65,11 +63,51 @@ namespace LogicMaster.gameplay
             return false;
         }
 
+        public override void DetachFrom(LogicElement element)
+        {
+            element.HandleDetachment(this);
+            for (int i = 0; i < inputElements.Length; i++)
+            {
+                if (inputElements[i] == element)
+                {
+                    inputElements[i] = null;
+                    return;
+                }
+            }
+            outputElements.Remove(element);
+        }
+
+        public override void HandleDetachment(LogicElement element)
+        {
+            for (int i = 0; i < inputElements.Length; i++)
+            {
+                if (inputElements[i] == element)
+                {
+                    inputElements[i] = null;
+                    return;
+                }
+            }
+            outputElements.Remove(element);
+        }
+
+        public override void DetachAll()
+        {
+            for (int i = 0; i < inputElements.Length; i++)
+            {
+                if (inputElements[i] != null)
+                {
+                    DetachFrom(inputElements[i]);
+                }
+            }
+            for (int i = outputElements.Count - 1; i >= 0; i--)
+            {
+                DetachFrom(outputElements[i]);
+            }
+        }
         public LogicGate()
         {
             int inputCount = BitOperations.Log2((uint)TruthTable.Length);
             inputElements = new LogicElement[inputCount];
-            outputElement = null;
             output = GetOutputLogic();
         }
 

@@ -21,7 +21,7 @@ namespace LogicMaster.gui.controls
     /// </summary>
     public partial class SourceObject : UserControl
     {
-        private LogicSource? logicSource;
+        public LogicSource? logicSource { get; set; }
 
         public SourceObject()
         {

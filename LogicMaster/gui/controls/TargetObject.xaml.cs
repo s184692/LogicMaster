@@ -1,5 +1,7 @@
-﻿using System;
+﻿using LogicMaster.gameplay;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,27 @@ namespace LogicMaster.gui.controls
     /// </summary>
     public partial class TargetObject : UserControl
     {
+        private LogicTarget? logicTarget = null;
+
         public TargetObject()
         {
             InitializeComponent();
+        }
+
+        public TargetObject(LogicTarget target)
+        {
+            InitializeComponent();
+            logicTarget = target;
+            logicTarget.PropertyChanged += LogicTarget_PropertyChanged;
+            targetLight.Fill = target.ActiveColor;
+        }
+
+        private void LogicTarget_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ActiveColor" && logicTarget != null)
+            {
+                targetLight.Fill = logicTarget.ActiveColor;
+            }
         }
     }
 }

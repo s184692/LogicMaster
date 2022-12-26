@@ -21,12 +21,11 @@ namespace LogicMaster.gui.controls
     /// </summary>
     public partial class GateObject : UserControl
     {
-        private LogicGate? logicGate;
+        private LogicGate? logicGate = null;
 
         public GateObject()
         {
             InitializeComponent();
-            logicGate = null;
         }
 
         public GateObject(LogicGate gate)
@@ -42,7 +41,7 @@ namespace LogicMaster.gui.controls
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DataObject data = new DataObject();
-                data.SetData("Source", gateImage.Source);
+                data.SetData("LogicGate", logicGate);
                 data.SetData("Type", this.GetType());
 
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Move);

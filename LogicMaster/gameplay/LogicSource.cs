@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace LogicMaster.gameplay
@@ -11,7 +13,7 @@ namespace LogicMaster.gameplay
     {
         private readonly bool active;
 
-        private LogicElement? outputElement;
+        private LogicElement? outputElement = null;
 
         public SolidColorBrush ActiveColor
         {
@@ -23,7 +25,7 @@ namespace LogicMaster.gameplay
                 }
                 else
                 {
-                    return new SolidColorBrush(Color.FromRgb(255, 0, 255));
+                    return new SolidColorBrush(Color.FromRgb(255, 0, 0));
                 }
             }
         }
@@ -61,10 +63,34 @@ namespace LogicMaster.gameplay
             return false;
         }
 
+        public override void DetachFrom(LogicElement element)
+        {
+            if (element == outputElement)
+            {
+                element.HandleDetachment(this);
+                outputElement = null;
+            }
+        }
+
+        public override void HandleDetachment(LogicElement element)
+        {
+            if (element == outputElement)
+            {
+                outputElement = null;
+            }
+        }
+
+        public override void DetachAll()
+        {
+            if (outputElement != null)
+            {
+                DetachFrom(outputElement);
+            }
+        }
+
         public LogicSource(bool active)
         {
             this.active = active;
-            this.outputElement = null;
         }
     }
 }

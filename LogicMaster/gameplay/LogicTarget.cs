@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,11 +9,13 @@ using System.Windows.Media;
 
 namespace LogicMaster.gameplay
 {
-    public class LogicTarget : LogicElement
+    public class LogicTarget : LogicElement, INotifyPropertyChanged
     {
-        private bool active;
+        private bool active = false;
 
-        private LogicElement? inputElement;
+        private LogicElement? inputElement = null;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public SolidColorBrush ActiveColor
         {
@@ -23,7 +27,7 @@ namespace LogicMaster.gameplay
                 }
                 else
                 {
-                    return new SolidColorBrush(Color.FromRgb(0, 0, 0));
+                    return new SolidColorBrush(Color.FromRgb(54, 54, 54));
                 }
             }
         }
@@ -46,6 +50,11 @@ namespace LogicMaster.gameplay
             {
                 active = false;
             }
+            // sends notification to change color
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("ActiveColor"));
+            }
         }
 
         public override void AttachTo(LogicElement element)
@@ -66,9 +75,33 @@ namespace LogicMaster.gameplay
             }
         }
 
+        public override void DetachFrom(LogicElement element)
+        {
+            if (element == inputElement)
+            {
+                element.HandleDetachment(this);
+                inputElement = null;
+            }
+        }
+
+        public override void HandleDetachment(LogicElement element)
+        {
+            if (element == inputElement)
+            {
+                inputElement = null;
+            }
+        }
+
+        public override void DetachAll()
+        {
+            if (inputElement != null)
+            {
+                DetachFrom(inputElement);
+            }
+        }
+
         public LogicTarget()
         {
-            this.inputElement = null;
             HandleSignal();
         }
     }
