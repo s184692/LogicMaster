@@ -1,5 +1,5 @@
-﻿using LogicMaster.gameplay;
-using LogicMaster.gameplay.gates;
+﻿using LogicMaster.gameplay.logic.gates;
+using LogicMaster.gameplay.logic;
 using LogicMaster.gui.controls;
 using System;
 using System.Collections.Generic;
@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Numerics;
 
 namespace LogicMaster.gui.pages
 {
@@ -54,28 +55,10 @@ namespace LogicMaster.gui.pages
             lc4.ConnectTo(lc2);
             lc2.ConnectTo(lc1);
 
-            lc1.Width = 40.0;
-            lc2.Width = 40.0;
-            lc3.Width = 40.0;
-            lc4.Width = 40.0;
-            lc1.Height = 40.0;
-            lc2.Height = 40.0;
-            lc3.Height = 40.0;
-            lc4.Height = 40.0;
-
-            Canvas.SetLeft(lc1, 205.0);
-            Canvas.SetLeft(lc2, 205.0);
-            Canvas.SetLeft(lc3, 175.0);
-            Canvas.SetLeft(lc4, 235.0);
-            Canvas.SetTop(lc1, 100.0);
-            Canvas.SetTop(lc2, 200.0);
-            Canvas.SetTop(lc3, 300.0);
-            Canvas.SetTop(lc4, 300.0);
-
-            gameCanvas.Children.Add(lc1);
-            gameCanvas.Children.Add(lc2);
-            gameCanvas.Children.Add(lc3);
-            gameCanvas.Children.Add(lc4);
+            gameCanvas.AddContainer(lc1, new Point(0.5, 0.2));
+            gameCanvas.AddContainer(lc2, new Point(0.5, 0.4));
+            gameCanvas.AddContainer(lc3, new Point(0.4, 0.6));
+            gameCanvas.AddContainer(lc4, new Point(0.6, 0.6));
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)

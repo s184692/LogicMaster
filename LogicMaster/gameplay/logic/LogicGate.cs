@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace LogicMaster.gameplay
+namespace LogicMaster.gameplay.logic
 {
     public abstract class LogicGate : LogicElement
     {

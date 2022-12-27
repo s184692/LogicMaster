@@ -58,6 +58,8 @@ namespace LogicMaster
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
+            base.OnRenderSizeChanged(sizeInfo);
+
             double targetWidth = sizeInfo.NewSize.Height * windowTargetAspectRatio;
             targetWidth = targetWidth > windowInitialMinWidth ? targetWidth : windowInitialMinWidth;
             MinWidth = targetWidth + windowHorizontalMarkup;

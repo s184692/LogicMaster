@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LogicMaster.gameplay.logic;
 
-namespace LogicMaster.gameplay.gates
+namespace LogicMaster.gameplay.logic.gates
 {
-    public class OR : LogicGate
+    public class BUF : LogicGate
     {
         public override string Name
         {
             get
             {
-                return "OR";
+                return "BUF";
             }
         }
 
@@ -20,7 +21,7 @@ namespace LogicMaster.gameplay.gates
         {
             get
             {
-                return new bool[] { false, true, true, true };
+                return new bool[] { false, true };
             }
         }
 
@@ -28,7 +29,7 @@ namespace LogicMaster.gameplay.gates
         {
             get
             {
-                return new Uri("/resources/images/or.png", UriKind.Relative);
+                return new Uri("/resources/images/buf.png", UriKind.Relative);
             }
         }
     }

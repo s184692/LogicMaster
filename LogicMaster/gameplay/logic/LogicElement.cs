@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LogicMaster.gameplay
+namespace LogicMaster.gameplay.logic
 {
     public abstract class LogicElement
     {

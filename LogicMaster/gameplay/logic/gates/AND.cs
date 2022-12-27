@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LogicMaster.gameplay.logic;
 
-namespace LogicMaster.gameplay.gates
+namespace LogicMaster.gameplay.logic.gates
 {
     public class AND : LogicGate
     {
-        public override string Name 
-        { 
-            get 
-            { 
+        public override string Name
+        {
+            get
+            {
                 return "AND";
-            } 
+            }
         }
 
-        public override bool[] TruthTable 
+        public override bool[] TruthTable
         {
             get
             {

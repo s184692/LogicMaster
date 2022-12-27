@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:LogicMaster.gui.pages"
-      xmlns:control="clr-namespace:LogicMaster.gui.controls"
+      xmlns:visuals="clr-namespace:LogicMaster.gameplay.visuals"
       mc:Ignorable="d"
       DataContext="{Binding RelativeSource={RelativeSource Self}}"
       Title="Game" d:DesignHeight="800" d:DesignWidth="450">
@@ -19,7 +19,7 @@
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <Border Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{StaticResource Layer1}" BorderThickness="0 0 0 3" SnapsToDevicePixels="True">
-            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource Layer0}">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource Layer0}" SnapsToDevicePixels="True">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="4*"/>
                     <ColumnDefinition Width="8*"/>
@@ -75,7 +75,7 @@
                 </Grid>
             </Grid>
         </Border>
-        <Canvas Grid.Column="0" Grid.Row="1" x:Name="gameCanvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource SecondaryGreen}" SnapsToDevicePixels="True"/>
+        <visuals:GameCanvas Grid.Column="0" Grid.Row="1" x:Name="gameCanvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource SecondaryGreen}" SnapsToDevicePixels="True"/>
         <Border Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderBrush="{StaticResource Layer1}" BorderThickness="0 3 0 0" SnapsToDevicePixels="True">
             <Grid x:Name="inventoryGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource Layer0}">
                 <Grid.ColumnDefinitions>

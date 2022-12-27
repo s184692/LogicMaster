@@ -17,6 +17,6 @@
             <RowDefinition Height="18*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Ellipse Grid.Column="1" Grid.Row="1" x:Name="targetLight" StrokeThickness="2" Stroke="{StaticResource Layer0}"/>
+        <Ellipse Grid.Column="1" Grid.Row="1" x:Name="targetLight" StrokeThickness="4" Stroke="{StaticResource Layer0}"/>
     </Grid>
 </UserControl>

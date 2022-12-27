@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace LogicMaster.gameplay
+namespace LogicMaster.gameplay.logic
 {
     public class LogicTarget : LogicElement, INotifyPropertyChanged
     {
@@ -27,7 +27,7 @@ namespace LogicMaster.gameplay
                 }
                 else
                 {
-                    return new SolidColorBrush(Color.FromRgb(54, 54, 54));
+                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF404040"));
                 }
             }
         }

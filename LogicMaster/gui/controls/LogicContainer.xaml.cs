@@ -1,4 +1,4 @@
-﻿using LogicMaster.gameplay;
+﻿using LogicMaster.gameplay.logic;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,13 +22,13 @@ namespace LogicMaster.gui.controls
     /// </summary>
     public partial class LogicContainer : UserControl
     {
-        public LogicElement? logicElement { get; private set; }
+        public LogicElement? logicElement { get; private set; } = null;
 
-        private List<LogicContainer> inputLogicContainers = new List<LogicContainer>();
+        public List<LogicContainer> inputLogicContainers { get; private set; } = new List<LogicContainer>();
 
-        private List<LogicContainer> outputLogicContainers = new List<LogicContainer>();
+        public List<LogicContainer> outputLogicContainers { get; private set; } = new List<LogicContainer>();
 
-        private ImageSource? previous = null;
+        private ImageSource? previous { get; set; } = null;
 
         public LogicContainer()
         {

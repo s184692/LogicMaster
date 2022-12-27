@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LogicMaster.gameplay.logic;
 
-namespace LogicMaster.gameplay.gates
+namespace LogicMaster.gameplay.logic.gates
 {
-    public class XOR : LogicGate
+    public class NOT : LogicGate
     {
         public override string Name
         {
             get
             {
-                return "XOR";
+                return "NOT";
             }
         }
 
@@ -20,7 +21,7 @@ namespace LogicMaster.gameplay.gates
         {
             get
             {
-                return new bool[] { false, true, true, false };
+                return new bool[] { true, false };
             }
         }
 
@@ -28,7 +29,7 @@ namespace LogicMaster.gameplay.gates
         {
             get
             {
-                return new Uri("/resources/images/xor.png", UriKind.Relative);
+                return new Uri("/resources/images/not.png", UriKind.Relative);
             }
         }
     }

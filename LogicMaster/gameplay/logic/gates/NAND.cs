@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LogicMaster.gameplay.logic;
 
-namespace LogicMaster.gameplay.gates
+namespace LogicMaster.gameplay.logic.gates
 {
-    public class XNOR : LogicGate
+    public class NAND : LogicGate
     {
         public override string Name
         {
             get
             {
-                return "XNOR";
+                return "NAND";
             }
         }
 
@@ -20,7 +21,7 @@ namespace LogicMaster.gameplay.gates
         {
             get
             {
-                return new bool[] { true, false, false, true };
+                return new bool[] { true, false, false, false };
             }
         }
 
@@ -28,7 +29,7 @@ namespace LogicMaster.gameplay.gates
         {
             get
             {
-                return new Uri("/resources/images/xnor.png", UriKind.Relative);
+                return new Uri("/resources/images/nand.png", UriKind.Relative);
             }
         }
     }
