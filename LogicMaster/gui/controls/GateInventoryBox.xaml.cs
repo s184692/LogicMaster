@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicMaster.gameplay.logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,15 @@ namespace LogicMaster.gui.controls
         public GateInventoryBox()
         {
             InitializeComponent();
+        }
+
+        public GateInventoryBox(LogicGate gate, int column, int row)
+        {
+            InitializeComponent();
+            Grid.SetColumn(this, column);
+            Grid.SetRow(this, row);
+            titleLabel.Content = gate.Name;
+            gateContainer.Children.Add(new GateObject(gate));
         }
     }
 }

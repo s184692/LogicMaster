@@ -13,17 +13,24 @@
     <SolidColorBrush x:Key="Layer3">#FF808080</SolidColorBrush>
     <FontFamily x:Key="DefaultFontFamily">Arial Black</FontFamily>
     
+    <SolidColorBrush x:Key="SourceActive">#FF00FF00</SolidColorBrush>
+    <SolidColorBrush x:Key="SourceInactive">#FFFF0000</SolidColorBrush>
+    <SolidColorBrush x:Key="TargetActive">#FFFFFF00</SolidColorBrush>
+    <SolidColorBrush x:Key="TargetInactive">#FF404040</SolidColorBrush>
+    <SolidColorBrush x:Key="WireActive">#FFFFFF00</SolidColorBrush>
+    <SolidColorBrush x:Key="WireInactive">#FF404040</SolidColorBrush>
+    
     <!--Image paths-->
     <Image x:Key="ExitButtonImage" Source="/resources/images/exit_button.png"/>
     <Image x:Key="RestartButtonImage" Source="/resources/images/restart_button.png"/>
-    <Image x:Key="andGateImage" Source="/resources/images/and.png"/>
-    <Image x:Key="nandGateImage" Source="/resources/images/nand.png"/>
-    <Image x:Key="orGateImage" Source="/resources/images/or.png"/>
-    <Image x:Key="norGateImage" Source="/resources/images/nor.png"/>
-    <Image x:Key="xorGateImage" Source="/resources/images/xor.png"/>
-    <Image x:Key="xnorGateImage" Source="/resources/images/xnor.png"/>
-    <Image x:Key="bufGateImage" Source="/resources/images/buf.png"/>
-    <Image x:Key="notGateImage" Source="/resources/images/not.png"/>
+    <Image x:Key="ANDImage" Source="/resources/images/and.png"/>
+    <Image x:Key="NANDImage" Source="/resources/images/nand.png"/>
+    <Image x:Key="ORImage" Source="/resources/images/or.png"/>
+    <Image x:Key="NORImage" Source="/resources/images/nor.png"/>
+    <Image x:Key="XORImage" Source="/resources/images/xor.png"/>
+    <Image x:Key="XNORImage" Source="/resources/images/xnor.png"/>
+    <Image x:Key="BUFImage" Source="/resources/images/buf.png"/>
+    <Image x:Key="NOTImage" Source="/resources/images/not.png"/>
 
     <!--Standard label style-->
     <Style x:Key="StandardLabel" TargetType="Label">

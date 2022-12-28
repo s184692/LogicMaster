@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LogicMaster.gameplay.logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,21 +21,18 @@ namespace LogicMaster.gui.controls
     /// </summary>
     public partial class GateObject : UserControl
     {
+        private LogicGate? logicGate = null;
+
         public GateObject()
         {
             InitializeComponent();
         }
 
-        public GateObject(Image img)
+        public GateObject(LogicGate gate)
         {
             InitializeComponent();
-            gateImage.Source = img.Source;
-        }
-
-        public GateObject(GateObject go)
-        {
-            InitializeComponent();
-            gateImage.Source = go.gateImage.Source;
+            logicGate = gate;
+            gateImage.Source = gate.GateImageSource;
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
@@ -43,7 +41,7 @@ namespace LogicMaster.gui.controls
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DataObject data = new DataObject();
-                data.SetData("Source", gateImage.Source);
+                data.SetData("LogicGate", logicGate);
                 data.SetData("Type", this.GetType());
 
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
