@@ -33,7 +33,16 @@ namespace LogicMaster.gui.controls
         {
             InitializeComponent();
             logicSource = source;
+            logicSource.PropertyChanged += LogicSource_PropertyChanged;
             sourceLight.Fill = source.ActiveColor;
+        }
+
+        private void LogicSource_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "State" && logicSource != null)
+            {
+                sourceLight.Fill = logicSource.ActiveColor;
+            }
         }
     }
 }

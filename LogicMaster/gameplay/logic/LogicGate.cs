@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace LogicMaster.gameplay.logic
 {
@@ -14,26 +15,15 @@ namespace LogicMaster.gameplay.logic
 
         public abstract bool[] TruthTable { get; }
 
-        public abstract Uri ImageURI { get; }
+        public abstract ImageSource GateImageSource { get; }
 
         protected LogicElement?[] inputElements;
 
         protected List<LogicElement> outputElements = new List<LogicElement>();
 
-        protected bool output;
-
-        public override bool State
-        {
-            get
-            {
-                return output;
-            }
-        }
-
         public override void HandleSignal()
         {
-            output = GetOutputLogic();
-
+            State = GetOutputLogic();
 
             foreach (LogicElement logicElement in outputElements)
             {
@@ -108,7 +98,7 @@ namespace LogicMaster.gameplay.logic
         {
             int inputCount = BitOperations.Log2((uint)TruthTable.Length);
             inputElements = new LogicElement[inputCount];
-            output = GetOutputLogic();
+            State = GetOutputLogic();
         }
 
         protected bool GetOutputLogic()

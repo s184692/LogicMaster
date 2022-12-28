@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using LogicMaster.gameplay.logic;
 
 namespace LogicMaster.gameplay.logic.gates
 {
     public class XNOR : LogicGate
     {
+        private static readonly ImageSource _imageSource = ((Image)Application.Current.FindResource("XNORImage")).Source;
+
         public override string Name
         {
             get
@@ -25,11 +30,11 @@ namespace LogicMaster.gameplay.logic.gates
             }
         }
 
-        public override Uri ImageURI
+        public override ImageSource GateImageSource
         {
             get
             {
-                return new Uri("/resources/images/xnor.png", UriKind.Relative);
+                return _imageSource;
             }
         }
     }

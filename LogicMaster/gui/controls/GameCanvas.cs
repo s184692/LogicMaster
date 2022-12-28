@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
@@ -16,7 +17,11 @@ namespace LogicMaster.gameplay.visuals
 {
     public class GameCanvas : Canvas
     {
-        public List<(LogicContainer lc, Point pos)> logicContainers { get; private set; }
+        private static readonly SolidColorBrush inactiveWireColor = (SolidColorBrush)Application.Current.FindResource("WireInactive");
+
+        private static readonly SolidColorBrush activeWireColor = (SolidColorBrush)Application.Current.FindResource("WireActive");
+
+        private List<(LogicContainer lc, Point pos)> logicContainers { get; set; }
 
         private double containerSize
         {
@@ -34,10 +39,6 @@ namespace LogicMaster.gameplay.visuals
             }
         }
 
-        private SolidColorBrush inactiveWireColor { get; } = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF404040"));
-
-        private SolidColorBrush activeWireColor { get; } = new SolidColorBrush(Color.FromRgb(255, 255, 0));
-
         public GameCanvas() : base()
         {
             logicContainers = new List<(LogicContainer lc, Point pos)>();
@@ -46,6 +47,7 @@ namespace LogicMaster.gameplay.visuals
         public void AddContainer(LogicContainer lc, Point pos)
         {
             logicContainers.Add((lc, pos));
+            lc.PropertyChanged += AnyLogicContainer_PropertyChanged;
             Children.Add(lc);
         }
 
@@ -136,6 +138,7 @@ namespace LogicMaster.gameplay.visuals
 
         private void DrawContainerOutputWires(LogicContainer sourceContainer)
         {
+            bool sourceState = sourceContainer.logicElement != null ? sourceContainer.logicElement.State : false;
             int outputCount = sourceContainer.outputLogicContainers.Count;
             int inputIndex = 0;
             for (int outputIndex = 0; outputIndex < outputCount; outputIndex++)
@@ -155,7 +158,7 @@ namespace LogicMaster.gameplay.visuals
                 Point? dst = GetConnectorPosition(targetContainer, (double)(inputIndex + 1) / (double)(inputCount + 1), true);
                 if (src.HasValue && dst.HasValue)
                 {
-                    DrawWire(src.Value, dst.Value, false);
+                    DrawWire(src.Value, dst.Value, sourceState);
                 }
             }
         }
@@ -178,6 +181,12 @@ namespace LogicMaster.gameplay.visuals
             {
                 SetContainerOnCanvas(pair);
             }
+        }
+
+        private void AnyLogicContainer_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            ClearWires();
+            DrawAllContainersWires();
         }
     }
 }

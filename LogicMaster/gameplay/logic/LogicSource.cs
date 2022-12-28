@@ -11,7 +11,9 @@ namespace LogicMaster.gameplay.logic
 {
     public class LogicSource : LogicElement
     {
-        private readonly bool active;
+        private static readonly SolidColorBrush inactiveSourceColor = (SolidColorBrush)Application.Current.FindResource("SourceInactive");
+
+        private static readonly SolidColorBrush activeSourceColor = (SolidColorBrush)Application.Current.FindResource("SourceActive");
 
         private LogicElement? outputElement = null;
 
@@ -19,22 +21,14 @@ namespace LogicMaster.gameplay.logic
         {
             get
             {
-                if (active)
+                if (State)
                 {
-                    return new SolidColorBrush(Color.FromRgb(0, 255, 0));
+                    return activeSourceColor;
                 }
                 else
                 {
-                    return new SolidColorBrush(Color.FromRgb(255, 0, 0));
+                    return inactiveSourceColor;
                 }
-            }
-        }
-
-        public override bool State
-        {
-            get
-            {
-                return active;
             }
         }
 
@@ -90,7 +84,7 @@ namespace LogicMaster.gameplay.logic
 
         public LogicSource(bool active)
         {
-            this.active = active;
+            State = active;
         }
     }
 }

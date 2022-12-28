@@ -32,7 +32,7 @@ namespace LogicMaster.gui.controls
         {
             InitializeComponent();
             logicGate = gate;
-            gateImage.Source = new BitmapImage(gate.ImageURI);
+            gateImage.Source = gate.GateImageSource;
         }
 
         protected override void OnMouseMove(MouseEventArgs e)

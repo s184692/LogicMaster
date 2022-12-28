@@ -5,38 +5,31 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media;
 
 namespace LogicMaster.gameplay.logic
 {
-    public class LogicTarget : LogicElement, INotifyPropertyChanged
+    public class LogicTarget : LogicElement
     {
-        private bool active = false;
+        private static readonly SolidColorBrush inactiveTargetColor = (SolidColorBrush)Application.Current.FindResource("TargetInactive");
+
+        private static readonly SolidColorBrush activeTargetColor = (SolidColorBrush)Application.Current.FindResource("TargetActive");
 
         private LogicElement? inputElement = null;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         public SolidColorBrush ActiveColor
         {
             get
             {
-                if (active)
+                if (State)
                 {
-                    return new SolidColorBrush(Color.FromRgb(255, 255, 0));
+                    return activeTargetColor;
                 }
                 else
                 {
-                    return new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF404040"));
+                    return inactiveTargetColor;
                 }
-            }
-        }
-
-        public override bool State
-        {
-            get
-            {
-                return active;
             }
         }
 
@@ -44,16 +37,11 @@ namespace LogicMaster.gameplay.logic
         {
             if (inputElement != null)
             {
-                active = inputElement.State;
+                State = inputElement.State;
             }
             else
             {
-                active = false;
-            }
-            // sends notification to change color
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs("ActiveColor"));
+                State = false;
             }
         }
 

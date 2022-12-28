@@ -39,7 +39,7 @@ namespace LogicMaster.gui.controls
 
         private void LogicTarget_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "ActiveColor" && logicTarget != null)
+            if (e.PropertyName == "State" && logicTarget != null)
             {
                 targetLight.Fill = logicTarget.ActiveColor;
             }
