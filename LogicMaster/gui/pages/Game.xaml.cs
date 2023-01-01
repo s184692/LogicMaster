@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Numerics;
+using LogicMaster.gameplay;
 
 namespace LogicMaster.gui.pages
 {
@@ -24,9 +25,11 @@ namespace LogicMaster.gui.pages
     /// </summary>
     public partial class Game : Page
     {
+        private GameManager gameManager { get; set; }
         public Game()
         {
             InitializeComponent();
+            gameManager = new GameManager(this);
         }
 
         public void LoadNewGame()
@@ -42,23 +45,7 @@ namespace LogicMaster.gui.pages
             inventoryGrid.Children.Add(new GateInventoryBox(new XOR(), 7, 1));
             inventoryGrid.Children.Add(new GateInventoryBox(new XNOR(), 7, 3));
 
-            LogicTarget lt1 = new LogicTarget();
-            LogicSource ls1 = new LogicSource(true);
-            LogicSource ls2 = new LogicSource(false);
-
-            LogicContainer lc1 = new LogicContainer(lt1);
-            LogicContainer lc2 = new LogicContainer();
-            LogicContainer lc3 = new LogicContainer(ls1);
-            LogicContainer lc4 = new LogicContainer(ls2);
-
-            lc3.ConnectTo(lc2);
-            lc4.ConnectTo(lc2);
-            lc2.ConnectTo(lc1);
-
-            gameCanvas.AddContainer(lc1, new Point(0.5, 0.2));
-            gameCanvas.AddContainer(lc2, new Point(0.5, 0.4));
-            gameCanvas.AddContainer(lc3, new Point(0.4, 0.6));
-            gameCanvas.AddContainer(lc4, new Point(0.6, 0.6));
+            // todo ładowanie game managera
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
