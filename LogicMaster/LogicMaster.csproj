@@ -5,60 +5,52 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="resources\images\and.png" />
-    <None Remove="resources\images\background.png" />
-    <None Remove="resources\images\buf.png" />
-    <None Remove="resources\images\exit_button.png" />
-    <None Remove="resources\images\logo.png" />
-    <None Remove="resources\images\nand.png" />
-    <None Remove="resources\images\nor.png" />
-    <None Remove="resources\images\not.png" />
-    <None Remove="resources\images\or.png" />
-    <None Remove="resources\images\restart_button.png" />
-    <None Remove="resources\images\xnor.png" />
-    <None Remove="resources\images\xor.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="resources\images\and.png">
+    <Content Include="resources\images\and.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\background.png">
+    </Content>
+    <Content Include="resources\images\background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\buf.png">
+    </Content>
+    <Content Include="resources\images\buf.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\exit_button.png">
+    </Content>
+    <Content Include="resources\images\exit_button.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\logo.png">
+    </Content>
+    <Content Include="resources\images\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\nand.png">
+    </Content>
+    <Content Include="resources\images\nand.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\nor.png">
+    </Content>
+    <Content Include="resources\images\nor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\not.png">
+    </Content>
+    <Content Include="resources\images\not.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\or.png">
+    </Content>
+    <Content Include="resources\images\or.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\restart_button.png">
+    </Content>
+    <Content Include="resources\images\restart_button.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\xnor.png">
+    </Content>
+    <Content Include="resources\images\xnor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="resources\images\xor.png">
+    </Content>
+    <Content Include="resources\images\xor.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    </Content>
+    <Content Include="resources\sounds\button_click.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\sounds\gate_drop.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -3,6 +3,7 @@ using LogicMaster.gui.dialog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +23,8 @@ namespace LogicMaster.gui.pages
     /// </summary>
     public partial class MainMenu : Page
     {
+        private static readonly SoundPlayer clickSound = new SoundPlayer(@"resources/sounds/button_click.wav");
+
         private Dictionary<string, GameSettings> difficultyLevels { get; } = new Dictionary<string, GameSettings>()
         {
             { "Easy", new GameSettings(GameSettings.DifficultyPresets.Easy) },
@@ -36,6 +39,8 @@ namespace LogicMaster.gui.pages
 
         private void newGameButton_Click(object sender, RoutedEventArgs e)
         {
+            clickSound.Play();
+
             MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
             if (mainWindow != null)
             {
@@ -52,6 +57,8 @@ namespace LogicMaster.gui.pages
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
+            clickSound.Play();
+
             MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
             if (mainWindow != null)
                 mainWindow.ContinueGame();
@@ -59,6 +66,8 @@ namespace LogicMaster.gui.pages
 
         private void quitButton_Click(object sender, RoutedEventArgs e)
         {
+            clickSound.Play();
+
             MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
             if (mainWindow != null)
                 mainWindow.Close();

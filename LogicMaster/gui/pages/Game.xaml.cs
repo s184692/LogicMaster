@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using System.Numerics;
 using LogicMaster.gameplay;
 using LogicMaster.generator;
+using System.Media;
 
 namespace LogicMaster.gui.pages
 {
@@ -26,6 +27,8 @@ namespace LogicMaster.gui.pages
     /// </summary>
     public partial class Game : Page
     {
+        private static readonly SoundPlayer clickSound = new SoundPlayer(@"resources/sounds/button_click.wav");
+
         private GameManager gameManager { get; set; }
 
         public bool GameStarted { get { return gameManager.GameStarted; } }
@@ -50,6 +53,8 @@ namespace LogicMaster.gui.pages
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
         {
+            clickSound.Play();
+
             MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
             if (mainWindow != null)
             {
@@ -60,6 +65,8 @@ namespace LogicMaster.gui.pages
 
         private void restartButton_Click(object sender, RoutedEventArgs e)
         {
+            clickSound.Play();
+
             gameManager.RestartCurrentGame();
         }
     }

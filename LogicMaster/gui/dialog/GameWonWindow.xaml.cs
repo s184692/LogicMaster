@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +20,8 @@ namespace LogicMaster.gui.dialog
     /// </summary>
     public partial class GameWonWindow : Window
     {
+        private static readonly SoundPlayer clickSound = new SoundPlayer(@"resources/sounds/button_click.wav");
+
         public GameWonWindow(int time)
         {
             InitializeComponent();
@@ -27,6 +30,7 @@ namespace LogicMaster.gui.dialog
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            clickSound.Play();
             DialogResult = true;
         }
     }

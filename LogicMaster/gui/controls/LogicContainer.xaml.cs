@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,8 @@ namespace LogicMaster.gui.controls
     /// </summary>
     public partial class LogicContainer : UserControl, INotifyPropertyChanged, IGateDragAndDrop
     {
+        private static readonly SoundPlayer dropSound = new SoundPlayer(@"resources/sounds/gate_drop.wav");
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public LogicElement? logicElement { get; private set; } = null;
@@ -126,6 +129,8 @@ namespace LogicMaster.gui.controls
             {
                 if ((Type)e.Data.GetData("Type") == typeof(GateObject))
                 {
+                    dropSound.Play();
+
                     LogicGate logicGate = (LogicGate)e.Data.GetData("LogicGate");
                     DetachAndRemoveLogicElement();
                     SetAndAttachLogicElement(logicGate, false, true);

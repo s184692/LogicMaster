@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,8 @@ namespace LogicMaster.gui.dialog
     /// </summary>
     public partial class GateInfoWindow : Window
     {
+        private static readonly SoundPlayer clickSound = new SoundPlayer(@"resources/sounds/button_click.wav");
+
         public GateInfoWindow()
         {
             InitializeComponent();
@@ -184,6 +187,7 @@ namespace LogicMaster.gui.dialog
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
+            clickSound.Play();
             DialogResult = true;
         }
     }

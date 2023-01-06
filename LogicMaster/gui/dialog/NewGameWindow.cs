@@ -8,11 +8,14 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Documents;
+using System.Media;
 
 namespace LogicMaster.gui.dialog
 {
     public class NewGameWindow : GateInfoWindow
     {
+        private static readonly SoundPlayer clickSound = new SoundPlayer(@"resources/sounds/button_click.wav");
+
         public string Result { get; set; } = "";
 
         public NewGameWindow(string title, string[] options) : base()
@@ -52,6 +55,8 @@ namespace LogicMaster.gui.dialog
 
         private void OptionButton_Click(object sender, RoutedEventArgs e)
         {
+            clickSound.Play();
+
             Button? optionButton = sender as Button;
             if (optionButton != null)
             {

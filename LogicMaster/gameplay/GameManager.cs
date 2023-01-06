@@ -228,6 +228,8 @@ namespace LogicMaster.gameplay
                         mainWindow.contentOverlay.Opacity = 0.5;
                         window.ShowDialog();
                         mainWindow.contentOverlay.Opacity = 0.0;
+
+                        ClearPreviousGame();
                         mainWindow.LoadMainMenu();
                     }
                 }
