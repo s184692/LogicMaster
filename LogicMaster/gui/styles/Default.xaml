@@ -32,6 +32,35 @@
     <Image x:Key="BUFImage" Source="/resources/images/buf.png"/>
     <Image x:Key="NOTImage" Source="/resources/images/not.png"/>
 
+    <!--Menu button style-->
+    <Style x:Key="MainMenuButton" TargetType="Button">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Foreground" Value="{StaticResource LightFontColor}"/>
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}"/>
+        <Setter Property="FontSize" Value="34"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="ButtonBorder" BorderThickness="4" BorderBrush="{StaticResource Layer1}" Background="{StaticResource Layer0}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="ButtonBorder" Value="{StaticResource Layer2}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.75"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--Standard label style-->
     <Style x:Key="StandardLabel" TargetType="Label">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
