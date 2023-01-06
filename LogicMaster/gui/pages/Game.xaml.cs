@@ -27,6 +27,9 @@ namespace LogicMaster.gui.pages
     public partial class Game : Page
     {
         private GameManager gameManager { get; set; }
+
+        public bool GameStarted { get { return gameManager.GameStarted; } }
+
         public Game()
         {
             InitializeComponent();
@@ -37,6 +40,11 @@ namespace LogicMaster.gui.pages
         {
             gameSettings.MergeChance = 0.0;
             gameManager.LoadNewGame(gameSettings);
+            gameManager.StartTimer();
+        }
+
+        public void ContinueGame()
+        {
             gameManager.StartTimer();
         }
 

@@ -43,6 +43,11 @@ namespace LogicMaster
 
         public void LoadMainMenu()
         {
+            if (game.GameStarted)
+                mainMenu.continueButton.IsEnabled = true;
+            else
+                mainMenu.continueButton.IsEnabled = false;
+
             contentFrame.Navigate(mainMenu);
         }
 
@@ -54,7 +59,11 @@ namespace LogicMaster
 
         public void ContinueGame()
         {
-
+            if (game.GameStarted)
+            {
+                contentFrame.Navigate(game);
+                game.ContinueGame();
+            }
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)

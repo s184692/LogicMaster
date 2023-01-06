@@ -52,7 +52,9 @@ namespace LogicMaster.gui.pages
 
         private void continueButton_Click(object sender, RoutedEventArgs e)
         {
-
+            MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
+            if (mainWindow != null)
+                mainWindow.ContinueGame();
         }
 
         private void quitButton_Click(object sender, RoutedEventArgs e)
