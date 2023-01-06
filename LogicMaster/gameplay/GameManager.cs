@@ -28,6 +28,10 @@ namespace LogicMaster.gameplay
 
         private List<List<LogicContainer>> containerLayers = null;
 
+        private int? Seed { get; set; } = null;
+
+        private GameSettings? Settings { get; set; } = null;
+
         public bool GameStarted { get; private set; }
 
         public GameManager(Game game)
@@ -43,13 +47,24 @@ namespace LogicMaster.gameplay
             GameStarted = false;
         }
 
-        public void LoadNewGame(GameSettings settings)
+        public void LoadNewGame(GameSettings settings, int? seed = null)
         {
             if (GameStarted)
                 ClearPreviousGame();
 
-            GameGenerator generator = new GameGenerator(settings);
-            game.levelLabel.Content = $"GAME#{generator.Seed}";
+            GameGenerator generator;
+            Settings = settings; // save settings
+            Seed = seed;
+            if (Seed == null)
+            {
+                generator = new GameGenerator(Settings);
+                Seed = generator.Seed;
+            }
+            else
+            {
+                generator = new GameGenerator(Settings, Seed.Value);
+            }
+            game.levelLabel.Content = $"GAME#{Seed}";
 
             List<List<(Type type, int input, bool state, bool merged, bool missing)>> layers = generator.GenerateGameCircuit();
             containerLayers = new List<List<LogicContainer>>();
@@ -179,6 +194,12 @@ namespace LogicMaster.gameplay
                 
         }
 
+        public void RestartCurrentGame()
+        {
+            if (Settings != null && Seed != null)
+                LoadNewGame(Settings, Seed);
+        }
+
         private void UpdateGameGoal()
         {
             if (GameStarted)
@@ -234,6 +255,7 @@ namespace LogicMaster.gameplay
         private void ResetTime()
         {
             time = 0;
+            game.timeLabel.Content = $"{0:00}:{0:00}";
         }
 
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)

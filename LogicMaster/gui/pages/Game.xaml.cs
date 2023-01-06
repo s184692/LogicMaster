@@ -52,7 +52,7 @@ namespace LogicMaster.gui.pages
 
         private void restartButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            gameManager.RestartCurrentGame();
         }
     }
 }
