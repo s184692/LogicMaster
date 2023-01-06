@@ -1,8 +1,13 @@
 ﻿using LogicMaster.gameplay.logic;
+using LogicMaster.gui.dialog;
+using LogicMaster.gui.pages;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Numerics;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,20 +24,95 @@ namespace LogicMaster.gui.controls
     /// <summary>
     /// Interaction logic for GateInventoryBox.xaml
     /// </summary>
-    public partial class GateInventoryBox : UserControl
+    public partial class GateInventoryBox : UserControl, INotifyPropertyChanged, IGateDragAndDrop
     {
-        public GateInventoryBox()
+        private bool[]? TruthTable { get; set; } = null;
+
+        private int InputCount
         {
-            InitializeComponent();
+            get
+            {
+                return BitOperations.Log2((uint)TruthTable.Length);
+            }
         }
+
+        private bool[][] Inputs
+        {
+            get
+            {
+                bool[][] inputs = new bool[TruthTable.Length][];
+
+                for (int i = 0; i < TruthTable.Length; i++)
+                {
+                    inputs[i] = new bool[InputCount];
+                    for (int j = 0; j < InputCount; j++)
+                    {
+                        inputs[i][InputCount - j - 1] = ((i >> j) & 1) > 0;
+                    }
+                }
+
+                return inputs;
+            }
+        }
+
+        private string Title { get; set; } = "";
+
+        private Type gateType { get; set; }
 
         public GateInventoryBox(LogicGate gate, int column, int row)
         {
             InitializeComponent();
             Grid.SetColumn(this, column);
             Grid.SetRow(this, row);
-            titleLabel.Content = gate.Name;
-            gateContainer.Children.Add(new GateObject(gate));
+
+            gateType = gate.GetType();
+            Title = gate.Name;
+            TruthTable = gate.TruthTable;
+            titleLabel.Content = Title;
+            gateContainer.Children.Add(new GateObject(this, gate, true));
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void infoButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (TruthTable != null)
+            {
+                MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
+                if (mainWindow != null)
+                {
+                    GateInfoWindow window = new GateInfoWindow(Title, InputCount, Inputs, TruthTable);
+                    window.Owner = mainWindow;
+                    mainWindow.contentOverlay.Opacity = 0.5;
+                    window.ShowDialog();
+                    mainWindow.contentOverlay.Opacity = 0.0;
+                }
+            }
+        }
+
+        void IGateDragAndDrop.HandleDragLeave(GateObject source)
+        {
+            gateContainer.Children.Remove(source);
+        }
+
+        void IGateDragAndDrop.HandleDragCancel(GateObject source)
+        {
+            gateContainer.Children.Add(source);
+        }
+
+        void IGateDragAndDrop.HandleDragSuccess(GateObject source)
+        {
+            Type sourceGateType = source.logicGate.GetType();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(sourceGateType.Name));
+        }
+
+        public void SetAmountLabel(int amount)
+        {
+            amountLabel.Content = $"{amount}x";
+            if (amount <= 0)
+                gateContainer.Children.Clear();
+            else if (gateContainer.Children.Count == 0)
+                    gateContainer.Children.Add(new GateObject(this, Activator.CreateInstance(gateType) as LogicGate, true));
         }
     }
 }

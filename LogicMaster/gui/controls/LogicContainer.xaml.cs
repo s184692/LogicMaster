@@ -21,7 +21,7 @@ namespace LogicMaster.gui.controls
     /// <summary>
     /// Interaction logic for LogicContainer.xaml
     /// </summary>
-    public partial class LogicContainer : UserControl, INotifyPropertyChanged
+    public partial class LogicContainer : UserControl, INotifyPropertyChanged, IGateDragAndDrop
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -42,23 +42,7 @@ namespace LogicMaster.gui.controls
         public LogicContainer(LogicElement element)
         {
             InitializeComponent();
-            logicElement = element;
-            logicElement.PropertyChanged += LogicElement_PropertyChanged;
-            AllowDrop = false;
-            switch(logicElement)
-            {
-                case LogicGate logicGate:
-                    imageContainer.Source = logicGate.GateImageSource;
-                    break;
-                case LogicSource logicSource:
-                    objectContainer.Children.Add(new SourceObject(logicSource));
-                    break;
-                case LogicTarget logicTarget:
-                    objectContainer.Children.Add(new TargetObject(logicTarget));
-                    break;
-                default:
-                    break;
-            }
+            SetAndAttachLogicElement(element);
         }
 
         private void LogicElement_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -83,9 +67,12 @@ namespace LogicMaster.gui.controls
             }
         }
 
-        private void SetAndAttachLogicElement(LogicElement element)
+        public void SetAndAttachLogicElement(LogicElement element, bool allowDrop = false, bool draggable = false)
         {
             logicElement = element;
+            logicElement.PropertyChanged += LogicElement_PropertyChanged;
+            AllowDrop = allowDrop;
+            // attach logicelement to other elements
             foreach (LogicContainer lc in inputLogicContainers)
             {
                 if (lc.logicElement != null)
@@ -100,6 +87,21 @@ namespace LogicMaster.gui.controls
                     logicElement.AttachTo(lc.logicElement);
                 }
             }
+            // draw object
+            switch (logicElement)
+            {
+                case LogicGate logicGate:
+                    objectContainer.Children.Add(new GateObject(this, logicGate, draggable));
+                    break;
+                case LogicSource logicSource:
+                    objectContainer.Children.Add(new SourceObject(logicSource));
+                    break;
+                case LogicTarget logicTarget:
+                    objectContainer.Children.Add(new TargetObject(logicTarget));
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void DetachAndRemoveLogicElement()
@@ -107,7 +109,12 @@ namespace LogicMaster.gui.controls
             if (logicElement != null)
             {
                 logicElement.DetachAll();
+                objectContainer.Children.Clear();
+                logicElement.PropertyChanged -= LogicElement_PropertyChanged;
                 logicElement = null;
+                foreach (LogicContainer lc in outputLogicContainers)
+                    if (lc.logicElement != null)
+                        lc.logicElement.HandleSignal();
             }
         }
 
@@ -121,11 +128,12 @@ namespace LogicMaster.gui.controls
                 {
                     LogicGate logicGate = (LogicGate)e.Data.GetData("LogicGate");
                     DetachAndRemoveLogicElement();
-                    SetAndAttachLogicElement(logicGate);
+                    SetAndAttachLogicElement(logicGate, false, true);
 
-                    imageContainer.Source = logicGate.GateImageSource;
+                    previous = null;
+                    imageContainer.Source = null;
                     imageContainer.Opacity = 1.0;
-                    e.Effects = DragDropEffects.Copy;
+                    e.Effects = DragDropEffects.Move;
                 }
             }
 
@@ -159,6 +167,22 @@ namespace LogicMaster.gui.controls
             imageContainer.Source = previous;
             imageContainer.Opacity = 1.0;
             previous = null;
+        }
+
+        void IGateDragAndDrop.HandleDragLeave(GateObject source)
+        {
+            DetachAndRemoveLogicElement();
+            AllowDrop = true;
+        }
+
+        void IGateDragAndDrop.HandleDragCancel(GateObject source)
+        {
+            PropertyChanged?.Invoke(source, new PropertyChangedEventArgs("Parent"));
+        }
+
+        void IGateDragAndDrop.HandleDragSuccess(GateObject source)
+        {
+            return;
         }
     }
 }

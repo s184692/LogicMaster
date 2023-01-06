@@ -23,11 +23,13 @@ namespace LogicMaster.gameplay.visuals
 
         private List<(LogicContainer lc, Point pos)> logicContainers { get; set; }
 
+        public int containerSizeModifier { get; set; } = 10;
+
         private double containerSize
         {
             get
             {
-                return Math.Min(ActualHeight, ActualWidth) / 10.0;
+                return Math.Min(ActualHeight, ActualWidth) / (2 * containerSizeModifier + 1);
             }
         }
 
@@ -35,7 +37,7 @@ namespace LogicMaster.gameplay.visuals
         {
             get
             {
-                return Math.Min(ActualHeight, ActualWidth) / 100.0;
+                return containerSize / 10.0;
             }
         }
 
@@ -108,8 +110,8 @@ namespace LogicMaster.gameplay.visuals
             line.Y2 = p2.Y;
             line.StrokeThickness = thickness;
             line.Stroke = stroke;
-            line.StrokeStartLineCap = PenLineCap.Square;
-            line.StrokeEndLineCap = PenLineCap.Square;
+            line.StrokeStartLineCap = PenLineCap.Round;
+            line.StrokeEndLineCap = PenLineCap.Round;
             line.SnapsToDevicePixels = true;
             SetZIndex(line, -1);
 
@@ -175,18 +177,30 @@ namespace LogicMaster.gameplay.visuals
         {
             base.OnRenderSizeChanged(sizeInfo);
 
-            ClearWires();
-            DrawAllContainersWires();
-            foreach ((LogicContainer lc, Point pos) pair in logicContainers)
-            {
-                SetContainerOnCanvas(pair);
-            }
+            UpdateVisuals();
         }
 
         private void AnyLogicContainer_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             ClearWires();
             DrawAllContainersWires();
+        }
+
+        public void UpdateVisuals()
+        {
+            ClearWires();
+            DrawAllContainersWires();
+            foreach ((LogicContainer lc, Point pos) pair in logicContainers)
+                SetContainerOnCanvas(pair);
+        }
+
+        public void ClearAllData()
+        {
+            ClearWires();
+            Children.Clear();
+            foreach (var (lc, pos) in logicContainers)
+                lc.PropertyChanged -= AnyLogicContainer_PropertyChanged;
+            logicContainers.Clear();
         }
     }
 }

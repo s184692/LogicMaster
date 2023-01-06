@@ -1,6 +1,7 @@
 ﻿using LogicMaster.gameplay.logic;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,16 +22,17 @@ namespace LogicMaster.gui.controls
     /// </summary>
     public partial class GateObject : UserControl
     {
-        private LogicGate? logicGate = null;
+        private IGateDragAndDrop _parent { get; set; }
 
-        public GateObject()
+        public LogicGate? logicGate { get; private set; } = null;
+
+        public bool Draggable { get; private set; } = false;
+
+        public GateObject(IGateDragAndDrop parent, LogicGate gate, bool draggable = false)
         {
             InitializeComponent();
-        }
-
-        public GateObject(LogicGate gate)
-        {
-            InitializeComponent();
+            _parent = parent;
+            Draggable = draggable;
             logicGate = gate;
             gateImage.Source = gate.GateImageSource;
         }
@@ -38,13 +40,17 @@ namespace LogicMaster.gui.controls
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (Draggable && e.LeftButton == MouseButtonState.Pressed)
             {
                 DataObject data = new DataObject();
                 data.SetData("LogicGate", logicGate);
                 data.SetData("Type", this.GetType());
 
-                DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
+                _parent.HandleDragLeave(this);
+                if (DragDrop.DoDragDrop(this, data, DragDropEffects.Move) == DragDropEffects.None)
+                    _parent.HandleDragCancel(this);
+                else
+                    _parent.HandleDragSuccess(this);
             }
         }
     }

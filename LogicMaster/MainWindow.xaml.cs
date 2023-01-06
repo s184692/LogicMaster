@@ -1,4 +1,5 @@
-﻿using LogicMaster.gui.pages;
+﻿using LogicMaster.generator;
+using LogicMaster.gui.pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,10 +46,10 @@ namespace LogicMaster
             contentFrame.Navigate(mainMenu);
         }
 
-        public void StartNewGame()
+        public void StartNewGame(GameSettings settings)
         {
             contentFrame.Navigate(game);
-            game.LoadNewGame();
+            game.LoadNewGame(settings);
         }
 
         public void ContinueGame()

@@ -1,7 +1,9 @@
 ﻿using LogicMaster.gameplay.logic;
 using LogicMaster.gameplay.logic.gates;
+using Microsoft.Windows.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Numerics;
@@ -64,21 +66,26 @@ namespace LogicMaster.generator
 
         private GameSettings settings { get; }
 
+        public int Seed { get; private set; }
+
         public GameGenerator()
         {
+            Seed = Math.Abs(Guid.NewGuid().GetHashCode());
             random = new Random();
             settings = new GameSettings();
         }
 
         public GameGenerator(GameSettings gameSettings)
         {
-            random = new Random();
+            Seed = Math.Abs(Guid.NewGuid().GetHashCode());
+            random = new Random(Seed);
             settings = gameSettings;
         }
 
         public GameGenerator(GameSettings gameSettings, int seed)
         {
-            random = new Random(seed);
+            Seed = seed;
+            random = new Random(Seed);
             settings = gameSettings;
         }
 
@@ -147,7 +154,7 @@ namespace LogicMaster.generator
         private (Logic[] logicLayer, Gate[]? gateLayer)[] GenerateLogicCircuit()
         {
             (Logic[] logicLayer, Gate[]? gateLayer)[] layers = new (Logic[], Gate[]?)[settings.LayerCount];
-            layers[0].logicLayer = GetRandomLogicLayer(settings.TargetCount); // layer of targets
+            layers[0].logicLayer = GetLogicLayer(settings.TargetCount, true); // layer of targets
             layers[settings.LayerCount - 1].gateLayer = null; // layer of sources
 
             for (int i = 0; i < settings.LayerCount - 1; i++)
@@ -159,7 +166,7 @@ namespace LogicMaster.generator
                     if (tempLayer == null)
                         tempLayer = GetLogicLayerFromUpperLayer(layers[i].gateLayer, layers[i].logicLayer, false); // try with merge disabled, it should be always possible (i think)
                     if (tempLayer == null)
-                        throw new Exception("Generation error: couldn't generate logic layer.");
+                        throw new Exception("Generation error: couldn't generate logic layer." + layers);
                     layers[i + 1].logicLayer = tempLayer;
                 }
                 else
@@ -176,6 +183,18 @@ namespace LogicMaster.generator
             for (int i = 0; i < layer.Length; i++)
             {
                 layer[i] = new Logic(random.NextSingle() < 0.5);
+            }
+
+            return layer;
+        }
+
+        private Logic[] GetLogicLayer(int n, bool state)
+        {
+            Logic[] layer = new Logic[n];
+
+            for (int i = 0; i < layer.Length; i++)
+            {
+                layer[i] = new Logic(state);
             }
 
             return layer;
@@ -206,28 +225,43 @@ namespace LogicMaster.generator
                 bool[] truthtable = gateLayer[i].TruthTable; // truthtable for that gate
                 bool[][] inputs = gateLayer[i].Inputs; // possible input patterns for that gate corresponding to truthtable
 
-                foreach (List<Logic> prev in prevList)
+                if (i == 0)
                 {
                     for (int j = 0; j < truthtable.Length; j++) // for every input pattern of a gate
                     {
-                        // if next gate is meant to have first input merged
-                        if (merge)
+                        // if this pattern will result in correct state
+                        if (truthtable[j] == state)
                         {
-                            // if this pattern will result in correct state and right input of gate to the left matches left input of this gate
-                            if (truthtable[j] == state && prev.Last().State == inputs[j][0])
-                            {
-                                List<Logic> temp = inputs[j][1..].ToList().ConvertAll(state => new Logic(state));
-                                prev.Last().IsMerged = true;
-                                nextList.Add(prev.Concat(temp).ToList());
-                            }
+                            List<Logic> temp = inputs[j].ToList().ConvertAll(state => new Logic(state));
+                            nextList.Add(temp);
                         }
-                        else
+                    }
+                }
+                else
+                {
+                    foreach (List<Logic> prev in prevList) // for every possible possible branch so far
+                    {
+                        for (int j = 0; j < truthtable.Length; j++) // for every input pattern of a gate
                         {
-                            // if this pattern will result in correct state
-                            if (truthtable[j] == state)
+                            // if next gate is meant to have first input merged
+                            if (merge)
                             {
-                                List<Logic> temp = inputs[j].ToList().ConvertAll(state => new Logic(state));
-                                nextList.Add(prev.Concat(temp).ToList());
+                                // if this pattern will result in correct state and right input of gate to the left matches left input of this gate
+                                if (truthtable[j] == state && prev.Last().State == inputs[j][0]) // TODO: zablokowac wielokrotne mergowanie
+                                {
+                                    List<Logic> temp = inputs[j][1..].ToList().ConvertAll(state => new Logic(state));
+                                    prev.Last().IsMerged = true;
+                                    nextList.Add(prev.Concat(temp).ToList());
+                                }
+                            }
+                            else
+                            {
+                                // if this pattern will result in correct state
+                                if (truthtable[j] == state)
+                                {
+                                    List<Logic> temp = inputs[j].ToList().ConvertAll(state => new Logic(state));
+                                    nextList.Add(prev.Concat(temp).ToList());
+                                }
                             }
                         }
                     }

@@ -14,5 +14,6 @@
 
     <Grid x:Name="backgroundGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource BackgroundImage}">
         <Frame x:Name="contentFrame" Width="450" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/>
+        <Rectangle x:Name="contentOverlay" Width="{Binding Path=ActualWidth, ElementName=contentFrame}" Height="{Binding Path=ActualHeight, ElementName=contentFrame}" Fill="#000000" Opacity="0.0" IsHitTestVisible="False"/>
     </Grid>
 </Window>

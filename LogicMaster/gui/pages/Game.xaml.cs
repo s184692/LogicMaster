@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Numerics;
 using LogicMaster.gameplay;
+using LogicMaster.generator;
 
 namespace LogicMaster.gui.pages
 {
@@ -32,20 +33,11 @@ namespace LogicMaster.gui.pages
             gameManager = new GameManager(this);
         }
 
-        public void LoadNewGame()
+        public void LoadNewGame(GameSettings gameSettings)
         {
-            inventoryGrid.Children.Clear();
-
-            inventoryGrid.Children.Add(new GateInventoryBox(new BUF(), 1, 1));
-            inventoryGrid.Children.Add(new GateInventoryBox(new NOT(), 1, 3));
-            inventoryGrid.Children.Add(new GateInventoryBox(new AND(), 3, 1));
-            inventoryGrid.Children.Add(new GateInventoryBox(new NAND(), 3, 3));
-            inventoryGrid.Children.Add(new GateInventoryBox(new OR(), 5, 1));
-            inventoryGrid.Children.Add(new GateInventoryBox(new NOR(), 5, 3));
-            inventoryGrid.Children.Add(new GateInventoryBox(new XOR(), 7, 1));
-            inventoryGrid.Children.Add(new GateInventoryBox(new XNOR(), 7, 3));
-
-            // todo ładowanie game managera
+            gameSettings.MergeChance = 0.0;
+            gameManager.LoadNewGame(gameSettings);
+            gameManager.StartTimer();
         }
 
         private void exitButton_Click(object sender, RoutedEventArgs e)
@@ -53,7 +45,7 @@ namespace LogicMaster.gui.pages
             MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
             if (mainWindow != null)
             {
-                inventoryGrid.Children.Clear();
+                gameManager.StopTimer();
                 mainWindow.LoadMainMenu();
             }
         }
