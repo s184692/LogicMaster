@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Media;
 using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -26,6 +27,8 @@ namespace LogicMaster.gui.controls
     /// </summary>
     public partial class GateInventoryBox : UserControl, INotifyPropertyChanged, IGateDragAndDrop
     {
+        private static readonly SoundPlayer clickSound = new SoundPlayer(@"resources/sounds/button_click.wav");
+
         private bool[]? TruthTable { get; set; } = null;
 
         private int InputCount
@@ -76,6 +79,8 @@ namespace LogicMaster.gui.controls
 
         private void infoButton_Click(object sender, RoutedEventArgs e)
         {
+            clickSound.Play();
+
             if (TruthTable != null)
             {
                 MainWindow? mainWindow = App.Current.MainWindow as MainWindow;
