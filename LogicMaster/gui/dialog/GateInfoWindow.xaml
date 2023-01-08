@@ -1,0 +1,12 @@
+﻿<Window x:Class="LogicMaster.gui.dialog.GateInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LogicMaster.gui.dialog"
+        mc:Ignorable="d"
+        Title="GateInfoWindow" Width="300" WindowStartupLocation="CenterOwner" WindowStyle="None" SizeToContent="Height" ResizeMode="NoResize" Background="Transparent" AllowsTransparency="True">
+    <Border SnapsToDevicePixels="True" Background="{StaticResource Layer3}" BorderBrush="{StaticResource Layer1}" BorderThickness="3" CornerRadius="8">
+        <StackPanel x:Name="contentStackPanel"/>
+    </Border>
+</Window>

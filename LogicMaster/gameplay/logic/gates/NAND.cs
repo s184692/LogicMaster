@@ -26,7 +26,7 @@ namespace LogicMaster.gameplay.logic.gates
         {
             get
             {
-                return new bool[] { true, false, false, false };
+                return new bool[] { true, true, true, false };
             }
         }
 

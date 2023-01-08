@@ -23,11 +23,13 @@ namespace LogicMaster.gameplay.visuals
 
         private List<(LogicContainer lc, Point pos)> logicContainers { get; set; }
 
+        public int containerSizeModifier { get; set; } = 10;
+
         private double containerSize
         {
             get
             {
-                return Math.Min(ActualHeight, ActualWidth) / 10.0;
+                return Math.Min(ActualHeight, ActualWidth) / (1.5 * containerSizeModifier + 1);
             }
         }
 
@@ -35,7 +37,7 @@ namespace LogicMaster.gameplay.visuals
         {
             get
             {
-                return Math.Min(ActualHeight, ActualWidth) / 100.0;
+                return containerSize / 10.0;
             }
         }
 
@@ -108,8 +110,8 @@ namespace LogicMaster.gameplay.visuals
             line.Y2 = p2.Y;
             line.StrokeThickness = thickness;
             line.Stroke = stroke;
-            line.StrokeStartLineCap = PenLineCap.Square;
-            line.StrokeEndLineCap = PenLineCap.Square;
+            line.StrokeStartLineCap = PenLineCap.Round;
+            line.StrokeEndLineCap = PenLineCap.Round;
             line.SnapsToDevicePixels = true;
             SetZIndex(line, -1);
 
@@ -140,9 +142,9 @@ namespace LogicMaster.gameplay.visuals
         {
             bool sourceState = sourceContainer.logicElement != null ? sourceContainer.logicElement.State : false;
             int outputCount = sourceContainer.outputLogicContainers.Count;
-            int inputIndex = 0;
             for (int outputIndex = 0; outputIndex < outputCount; outputIndex++)
             {
+                int inputIndex = 0;
                 LogicContainer targetContainer = sourceContainer.outputLogicContainers[outputIndex];
                 int inputCount = targetContainer.inputLogicContainers.Count;
                 // find connector slot index of target container
@@ -158,7 +160,7 @@ namespace LogicMaster.gameplay.visuals
                 Point? dst = GetConnectorPosition(targetContainer, (double)(inputIndex + 1) / (double)(inputCount + 1), true);
                 if (src.HasValue && dst.HasValue)
                 {
-                    DrawWire(src.Value, dst.Value, sourceState);
+                    DrawWire(src.Value, dst.Value, sourceState, 1 - (double)(outputIndex + 1) / (double)(outputCount + 1));
                 }
             }
         }
@@ -175,18 +177,30 @@ namespace LogicMaster.gameplay.visuals
         {
             base.OnRenderSizeChanged(sizeInfo);
 
-            ClearWires();
-            DrawAllContainersWires();
-            foreach ((LogicContainer lc, Point pos) pair in logicContainers)
-            {
-                SetContainerOnCanvas(pair);
-            }
+            UpdateVisuals();
         }
 
         private void AnyLogicContainer_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             ClearWires();
             DrawAllContainersWires();
+        }
+
+        public void UpdateVisuals()
+        {
+            ClearWires();
+            DrawAllContainersWires();
+            foreach ((LogicContainer lc, Point pos) pair in logicContainers)
+                SetContainerOnCanvas(pair);
+        }
+
+        public void ClearAllData()
+        {
+            ClearWires();
+            Children.Clear();
+            foreach (var (lc, pos) in logicContainers)
+                lc.PropertyChanged -= AnyLogicContainer_PropertyChanged;
+            logicContainers.Clear();
         }
     }
 }

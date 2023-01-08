@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:LogicMaster.gui.controls"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="50" AllowDrop="True">
-    <Border Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="True" Background="{StaticResource Layer3}" BorderBrush="{StaticResource Layer1}" BorderThickness="3" CornerRadius="8">
+    <Border Grid.Column="1" Grid.Row="1" x:Name="mainBorder"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SnapsToDevicePixels="True" Background="{StaticResource Layer3}" BorderBrush="{StaticResource Layer1}" BorderThickness="3" CornerRadius="8">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>

@@ -1,4 +1,5 @@
-﻿using LogicMaster.gui.pages;
+﻿using LogicMaster.generator;
+using LogicMaster.gui.pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,18 +43,27 @@ namespace LogicMaster
 
         public void LoadMainMenu()
         {
+            if (game.GameStarted)
+                mainMenu.continueButton.IsEnabled = true;
+            else
+                mainMenu.continueButton.IsEnabled = false;
+
             contentFrame.Navigate(mainMenu);
         }
 
-        public void StartNewGame()
+        public void StartNewGame(GameSettings settings)
         {
             contentFrame.Navigate(game);
-            game.LoadNewGame();
+            game.LoadNewGame(settings);
         }
 
         public void ContinueGame()
         {
-
+            if (game.GameStarted)
+            {
+                contentFrame.Navigate(game);
+                game.ContinueGame();
+            }
         }
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
