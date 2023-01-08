@@ -11,7 +11,7 @@ namespace LogicMaster.generator
         public enum DifficultyPresets { Easy, Medium, Hard };
 
         // ---Configuration constants---
-        private static readonly (int MIN, int MAX) TARGET_COUNT = (4, 6);
+        private static readonly (int MIN, int MAX) TARGET_COUNT = (3, 7);
 
         private static readonly (int MIN, int MAX) LAYER_COUNT = (3, 3);
 
