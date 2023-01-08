@@ -75,6 +75,7 @@ namespace LogicMaster.gui.controls
             logicElement = element;
             logicElement.PropertyChanged += LogicElement_PropertyChanged;
             AllowDrop = allowDrop;
+            mainBorder.Background = !allowDrop && !draggable ? (SolidColorBrush)App.Current.FindResource("Layer2") : mainBorder.Background;
             // attach logicelement to other elements
             foreach (LogicContainer lc in inputLogicContainers)
             {

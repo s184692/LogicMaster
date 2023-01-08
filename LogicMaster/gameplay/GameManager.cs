@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -93,36 +94,46 @@ namespace LogicMaster.gameplay
                 int inputsLeft = 0;
                 containerLayers.Add(new List<LogicContainer>());
 
-                for (int j = 0; j < layerWidth; j++)
+                //Debug.WriteLine($"Layer {i}:");
+                //Debug.WriteLine($"{"Type:",12}|{"Input:",6}|{"State:",6}|{"Merge:",6}|{"Miss:",6}");
+                //foreach (var e in layers[i])
+                //    Debug.WriteLine($"{e.type.Name,12}|{e.input,6}|{e.state,6}|{e.merged,6}|{e.missing,6}");
+
+                for (int j = 0; j < layerWidth; j++) // for each gate
                 {
                     Point pos = new Point((double)(j + 1) / (double)(layerWidth + 1), (double)(i + 1) / (double)(height + 1));
                     LogicContainer logicContainer = new LogicContainer();
                     logicContainer.PropertyChanged += LogicContainer_PropertyChanged;
 
-                    if (layers[i][j].missing)
-                        amounts[layers[i][j].type.Name]++;
-
                     if (i > 0) // connect to upper layers
                     {
+                        if (gateIndex >= layers[i - 1].Count) // ???
+                            break;
+
                         if (inputsLeft <= 0)
                             inputsLeft = layers[i - 1][gateIndex].input;
-
-                        if (layers[i - 1][gateIndex].merged)
-                        {
-                            logicContainer.ConnectTo(containerLayers[i - 1][gateIndex]);
-                            inputsLeft--;
-                            if (inputsLeft <= 0)
-                                gateIndex++;
-                        }
 
                         logicContainer.ConnectTo(containerLayers[i - 1][gateIndex]);
                         inputsLeft--;
                         if (inputsLeft <= 0)
+                        {
                             gateIndex++;
+                            if (gateIndex < layers[i - 1].Count && layers[i - 1][gateIndex - 1].merged)
+                            {
+                                inputsLeft = layers[i - 1][gateIndex].input;
+                                if (inputsLeft - 1 > 0)
+                                {
+                                    logicContainer.ConnectTo(containerLayers[i - 1][gateIndex]);
+                                    inputsLeft--;
+                                }
+                            }
+                        }
                     }
 
                     if (!layers[i][j].missing) // add logic element instance if not missing
                         logicContainer.SetAndAttachLogicElement(GetLogicElementFromLayerData(layers[i][j]));
+                    else // otherwise add it to inventory
+                        amounts[layers[i][j].type.Name]++;
 
                     containerLayers[i].Add(logicContainer);
                     game.gameCanvas.AddContainer(logicContainer, pos);

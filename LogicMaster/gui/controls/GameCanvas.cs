@@ -29,7 +29,7 @@ namespace LogicMaster.gameplay.visuals
         {
             get
             {
-                return Math.Min(ActualHeight, ActualWidth) / (2 * containerSizeModifier + 1);
+                return Math.Min(ActualHeight, ActualWidth) / (1.5 * containerSizeModifier + 1);
             }
         }
 
@@ -142,9 +142,9 @@ namespace LogicMaster.gameplay.visuals
         {
             bool sourceState = sourceContainer.logicElement != null ? sourceContainer.logicElement.State : false;
             int outputCount = sourceContainer.outputLogicContainers.Count;
-            int inputIndex = 0;
             for (int outputIndex = 0; outputIndex < outputCount; outputIndex++)
             {
+                int inputIndex = 0;
                 LogicContainer targetContainer = sourceContainer.outputLogicContainers[outputIndex];
                 int inputCount = targetContainer.inputLogicContainers.Count;
                 // find connector slot index of target container
@@ -160,7 +160,7 @@ namespace LogicMaster.gameplay.visuals
                 Point? dst = GetConnectorPosition(targetContainer, (double)(inputIndex + 1) / (double)(inputCount + 1), true);
                 if (src.HasValue && dst.HasValue)
                 {
-                    DrawWire(src.Value, dst.Value, sourceState);
+                    DrawWire(src.Value, dst.Value, sourceState, 1 - (double)(outputIndex + 1) / (double)(outputCount + 1));
                 }
             }
         }

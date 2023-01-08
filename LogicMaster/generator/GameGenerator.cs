@@ -220,7 +220,7 @@ namespace LogicMaster.generator
             {
                 List<List<Logic>> nextList = new List<List<Logic>>();
 
-                bool merge = mergeEnabled && prevList.Count > 0 && random.NextSingle() < settings.MergeChance ; // decide if to merge
+                bool merge = mergeEnabled && prevList.Count > 0; // decide if to merge
                 bool state = logicLayer[i].State; // state of output of a gate
                 bool[] truthtable = gateLayer[i].TruthTable; // truthtable for that gate
                 bool[][] inputs = gateLayer[i].Inputs; // possible input patterns for that gate corresponding to truthtable
@@ -244,10 +244,10 @@ namespace LogicMaster.generator
                         for (int j = 0; j < truthtable.Length; j++) // for every input pattern of a gate
                         {
                             // if next gate is meant to have first input merged
-                            if (merge)
+                            if (merge && inputs[0].Length > 1 && random.NextSingle() < settings.MergeChance)
                             {
                                 // if this pattern will result in correct state and right input of gate to the left matches left input of this gate
-                                if (truthtable[j] == state && prev.Last().State == inputs[j][0]) // TODO: zablokowac wielokrotne mergowanie
+                                if (truthtable[j] == state && prev.Last().State == inputs[j][0])
                                 {
                                     List<Logic> temp = inputs[j][1..].ToList().ConvertAll(state => new Logic(state));
                                     prev.Last().IsMerged = true;

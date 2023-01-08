@@ -41,7 +41,6 @@ namespace LogicMaster.gui.pages
 
         public void LoadNewGame(GameSettings gameSettings)
         {
-            gameSettings.MergeChance = 0.0;
             gameManager.LoadNewGame(gameSettings);
             gameManager.StartTimer();
         }

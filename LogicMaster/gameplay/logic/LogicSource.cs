@@ -15,7 +15,7 @@ namespace LogicMaster.gameplay.logic
 
         private static readonly SolidColorBrush activeSourceColor = (SolidColorBrush)Application.Current.FindResource("SourceActive");
 
-        private LogicElement? outputElement = null;
+        private List<LogicElement> outputElements = new List<LogicElement>();
 
         public SolidColorBrush ActiveColor
         {
@@ -34,21 +34,18 @@ namespace LogicMaster.gameplay.logic
 
         public override void HandleSignal()
         {
-            if (outputElement != null)
+            foreach (LogicElement logicElement in outputElements)
             {
-                outputElement.HandleSignal();
+                logicElement.HandleSignal();
             }
         }
 
         public override void AttachTo(LogicElement element)
         {
-            if (outputElement == null)
+            if (element.HandleAttachment(this))
             {
-                if (element.HandleAttachment(this))
-                {
-                    outputElement = element;
-                    outputElement.HandleSignal();
-                }
+                outputElements.Add(element);
+                element.HandleSignal();
             }
         }
 
@@ -59,27 +56,19 @@ namespace LogicMaster.gameplay.logic
 
         public override void DetachFrom(LogicElement element)
         {
-            if (element == outputElement)
-            {
-                element.HandleDetachment(this);
-                outputElement = null;
-            }
+            element.HandleAttachment(this);
+            outputElements.Remove(element);
         }
 
         public override void HandleDetachment(LogicElement element)
         {
-            if (element == outputElement)
-            {
-                outputElement = null;
-            }
+            outputElements.Remove(element);
         }
 
         public override void DetachAll()
         {
-            if (outputElement != null)
-            {
-                DetachFrom(outputElement);
-            }
+            for (int i = 0; i < outputElements.Count; i++)
+                DetachFrom(outputElements[i]);
         }
 
         public LogicSource(bool active)
