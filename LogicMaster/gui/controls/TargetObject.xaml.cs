@@ -28,7 +28,10 @@ namespace LogicMaster.gui.controls
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Konstruktor wygladu lampki
+        /// </summary>
+        /// <param name="target">obiekt klasy LogicTarget</param>
         public TargetObject(LogicTarget target)
         {
             InitializeComponent();
@@ -36,7 +39,7 @@ namespace LogicMaster.gui.controls
             logicTarget.PropertyChanged += LogicTarget_PropertyChanged;
             targetLight.Fill = target.ActiveColor;
         }
-
+     
         private void LogicTarget_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "State" && logicTarget != null)

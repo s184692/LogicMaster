@@ -22,12 +22,18 @@ namespace LogicMaster.gui.dialog
     public partial class GateInfoWindow : Window
     {
         private static readonly SoundPlayer clickSound = new SoundPlayer(@"resources/sounds/button_click.wav");
-
+        
         public GateInfoWindow()
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Konstruktor okna z informacjami o bramce
+        /// </summary>
+        /// <param name="title">nazwa</param>
+        /// <param name="inputCount">ilosc wejsc</param>
+        /// <param name="inputs">stan wejscia</param>
+        /// <param name="truthTable">tablica prawdy</param>
         public GateInfoWindow(string title, int inputCount, bool[][] inputs, bool[] truthTable)
         {
             InitializeComponent();
@@ -36,7 +42,11 @@ namespace LogicMaster.gui.dialog
             for (int i = 0; i < truthTable.Length; i++)
                 AddTableRow(inputs[i], truthTable[i]);
         }
-
+        /// <summary>
+        /// Funkcja dodajaca wiersz z tytulem
+        /// </summary>
+        /// <param name="title">nazwa</param>
+        /// <param name="inputCount">ilosc wejsc</param>
         protected void AddTitleRow(string title, int inputCount)
         {
             Grid titleRow = new Grid();
@@ -83,7 +93,10 @@ namespace LogicMaster.gui.dialog
 
             contentStackPanel.Children.Add(border);
         }
-
+        /// <summary>
+        /// Funkcja dodajaca naglowek IN i OUT do tabelki
+        /// </summary>
+        /// <param name="inputCount">ilosc wejsc</param>
         private void AddTableHeader(int inputCount)
         {
             Grid headerRow = new Grid();
@@ -135,7 +148,11 @@ namespace LogicMaster.gui.dialog
 
             contentStackPanel.Children.Add(border);
         }
-
+        /// <summary>
+        /// Funkcja dodajaca wiersze do tabeli
+        /// </summary>
+        /// <param name="inputs">stan wejscia</param>
+        /// <param name="truth">stan wyjscia</param>
         private void AddTableRow(bool[] inputs, bool truth)
         {
             Grid tableRow = new Grid();

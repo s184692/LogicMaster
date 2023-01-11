@@ -10,6 +10,9 @@ using LogicMaster.gameplay.logic;
 
 namespace LogicMaster.gameplay.logic.gates
 {
+    /// <summary>
+    /// Klasa bramki XNOR
+    /// </summary>
     public class XNOR : LogicGate
     {
         private static readonly ImageSource _imageSource = ((Image)Application.Current.FindResource("XNORImage")).Source;

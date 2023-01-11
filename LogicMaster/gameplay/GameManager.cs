@@ -17,6 +17,9 @@ using System.Windows;
 
 namespace LogicMaster.gameplay
 {
+    /// <summary>
+    /// Menadzer gry
+    /// </summary>
     public class GameManager
     {
         private Game game { get; set; }
@@ -47,7 +50,11 @@ namespace LogicMaster.gameplay
             inventory = new GameInventory(this);
             GameStarted = false;
         }
-
+        /// <summary>
+        /// Tworzenie nowej gry
+        /// </summary>
+        /// <param name="settings">Ustawienia gry</param>
+        /// <param name="seed">Ziarno generatora</param>
         public void LoadNewGame(GameSettings settings, int? seed = null)
         {
             if (GameStarted)
@@ -177,13 +184,17 @@ namespace LogicMaster.gameplay
                 return (LogicElement)Activator.CreateInstance(data.type);
             }
         }
-
+        /// <summary>
+        /// Dodawanie miejsc w wyposazeniu
+        /// </summary>
         private void AddInventoryBoxes()
         {
             foreach (var (key, value) in inventory.InventoryBoxes)
                 game.inventoryGrid.Children.Add(value);
         }
-
+        /// <summary>
+        /// Czyszczenie poprzedniej gry
+        /// </summary>
         private void ClearPreviousGame()
         {
             GameStarted = false;
@@ -204,14 +215,18 @@ namespace LogicMaster.gameplay
             containerLayers.Clear();
                 
         }
-
+        /// <summary>
+        /// Funkcja restartu gry
+        /// </summary>
         public void RestartCurrentGame()
         {
             if (Settings != null && Seed != null)
                 LoadNewGame(Settings, Seed);
         }
-
-        private void UpdateGameGoal()
+        /// <summary>
+        /// Funkcja sprawdzajaca stan rozgrywki
+        /// </summary>
+        private async void  UpdateGameGoal()
         {
             if (GameStarted)
             {
@@ -237,6 +252,7 @@ namespace LogicMaster.gameplay
                         GameWonWindow window = new GameWonWindow(time);
                         window.Owner = mainWindow;
                         mainWindow.contentOverlay.Opacity = 0.5;
+                        await Task.Delay(100);
                         window.ShowDialog();
                         mainWindow.contentOverlay.Opacity = 0.0;
 
@@ -246,7 +262,9 @@ namespace LogicMaster.gameplay
                 }
             }
         }
-
+        /// <summary>
+        /// Funkcja rozpoczynajaca odliczanie stopera
+        /// </summary>
         public void StartTimer()
         {
             if (!timer.Enabled)
@@ -255,7 +273,9 @@ namespace LogicMaster.gameplay
                 timer.Enabled = true;
             }
         }
-
+        /// <summary>
+        /// Funkcja konczaca odliczanie stopera
+        /// </summary>
         public void StopTimer()
         {
             if (timer.Enabled)
@@ -264,13 +284,15 @@ namespace LogicMaster.gameplay
                 timer.Enabled = false;
             }
         }
-
+        /// <summary>
+        /// Resetowanie czasu
+        /// </summary>
         private void ResetTime()
         {
             time = 0;
             game.timeLabel.Content = $"{0:00}:{0:00}";
         }
-
+      
         private void Timer_Elapsed(object? sender, ElapsedEventArgs e)
         {
             time++;

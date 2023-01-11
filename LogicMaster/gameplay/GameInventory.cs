@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace LogicMaster.gameplay
 {
+    /// <summary>
+    /// Klasa tworzaca wyposazenie gracza
+    /// </summary>
     public class GameInventory
     {
         private GameManager gameManager { get; set; }
@@ -18,13 +21,20 @@ namespace LogicMaster.gameplay
 
         public Dictionary<string, GateInventoryBox> InventoryBoxes { get; private set; }
 
+        /// <summary>
+        /// Tworzenie wyposazenia
+        /// </summary>
+        /// <param name="manager"></param>
         public GameInventory(GameManager manager)
         {
             gameManager = manager;
             InventoryAmounts = new Dictionary<string, int>();
             InventoryBoxes = new Dictionary<string, GateInventoryBox>();
         }
-
+        /// <summary>
+        /// Generowanie zawartosci wyposazenia (dostepnych bramek)
+        /// </summary>
+        /// <param name="amounts">ilosc generowanych bramek</param>
         public void InitializeInventory(Dictionary<string, int> amounts)
         {
             InventoryAmounts.Add("BUF", amounts["BUF"]);
@@ -63,7 +73,7 @@ namespace LogicMaster.gameplay
             InventoryBoxes["XOR"].SetAmountLabel(InventoryAmounts["XOR"]);
             InventoryBoxes["XNOR"].SetAmountLabel(InventoryAmounts["XNOR"]);
         }
-
+    
         private void InventoryAmountChanged_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             string? key = e.PropertyName;
@@ -77,7 +87,10 @@ namespace LogicMaster.gameplay
                 }
             }
         }
-
+        /// <summary>
+        /// Funkcja dodajaca bramke spowrotem do wyposazenia 
+        /// </summary>
+        /// <param name="key"></param>
         public void AddGateBackToInventory(string key)
         {
             if (InventoryAmounts.ContainsKey(key))
@@ -86,7 +99,9 @@ namespace LogicMaster.gameplay
                 InventoryBoxes[key].SetAmountLabel(InventoryAmounts[key]);
             }
         }
-
+        /// <summary>
+        /// Funkcja odpowiadajaca za czyszczenie wyposazenia po zabraniu bramki
+        /// </summary>
         public void ClearInventory()
         {
             InventoryBoxes["BUF"].PropertyChanged -= InventoryAmountChanged_PropertyChanged;

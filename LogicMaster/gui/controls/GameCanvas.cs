@@ -15,6 +15,9 @@ using LogicMaster.gui.controls;
 
 namespace LogicMaster.gameplay.visuals
 {
+    /// <summary>
+    /// Klasa odpowiadajaca za wyglad interfejsu graficznego
+    /// </summary>
     public class GameCanvas : Canvas
     {
         private static readonly SolidColorBrush inactiveWireColor = (SolidColorBrush)Application.Current.FindResource("WireInactive");
@@ -22,7 +25,7 @@ namespace LogicMaster.gameplay.visuals
         private static readonly SolidColorBrush activeWireColor = (SolidColorBrush)Application.Current.FindResource("WireActive");
 
         private List<(LogicContainer lc, Point pos)> logicContainers { get; set; }
-
+        
         public int containerSizeModifier { get; set; } = 10;
 
         private double containerSize
@@ -45,7 +48,7 @@ namespace LogicMaster.gameplay.visuals
         {
             logicContainers = new List<(LogicContainer lc, Point pos)>();
         }
-
+   
         public void AddContainer(LogicContainer lc, Point pos)
         {
             logicContainers.Add((lc, pos));

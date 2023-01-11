@@ -27,7 +27,11 @@ namespace LogicMaster.gui.controls
         public LogicGate? logicGate { get; private set; } = null;
 
         public bool Draggable { get; private set; } = false;
-
+        /// <summary>
+        /// Konstruktor przesuwanej bramki
+        /// </summary>
+        /// <param name="gate">jaka bramka jest przemieszczana</param>
+        /// <param name="draggable">czy jest przeciagalna</param>
         public GateObject(IGateDragAndDrop parent, LogicGate gate, bool draggable = false)
         {
             InitializeComponent();

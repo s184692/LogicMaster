@@ -9,6 +9,9 @@ using System.Windows.Media;
 
 namespace LogicMaster.gameplay.logic
 {
+    /// <summary>
+    /// Klasa modelujaca zrodlo logiczne
+    /// </summary>
     public class LogicSource : LogicElement
     {
         private static readonly SolidColorBrush inactiveSourceColor = (SolidColorBrush)Application.Current.FindResource("SourceInactive");
@@ -31,7 +34,9 @@ namespace LogicMaster.gameplay.logic
                 }
             }
         }
-
+        /// <summary>
+        /// Funkcja odpowiadajaca za przeslanie stanu do zrodla na podstawie poprzedniego
+        /// </summary>
         public override void HandleSignal()
         {
             foreach (LogicElement logicElement in outputElements)
@@ -39,7 +44,10 @@ namespace LogicMaster.gameplay.logic
                 logicElement.HandleSignal();
             }
         }
-
+        /// <summary>
+        /// Funkcja przylaczajaca zrodlo do innych elementow
+        /// </summary>
+        /// <param name="element">element do ktorego przylaczamy zrodlo</param>
         public override void AttachTo(LogicElement element)
         {
             if (element.HandleAttachment(this))
@@ -53,7 +61,10 @@ namespace LogicMaster.gameplay.logic
         {
             return false;
         }
-
+        /// <summary>
+        /// Funkcja odlaczajaca zrodlo od elementu
+        /// </summary>
+        /// <param name="element">element od ktorego odlaczamy zrodlo</param>
         public override void DetachFrom(LogicElement element)
         {
             element.HandleAttachment(this);

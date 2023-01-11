@@ -10,6 +10,9 @@ using LogicMaster.gameplay.logic;
 
 namespace LogicMaster.gameplay.logic.gates
 {
+    /// <summary>
+    /// Klasa bramki NAND
+    /// </summary>
     public class NAND : LogicGate
     {
         private static readonly ImageSource _imageSource = ((Image)Application.Current.FindResource("NANDImage")).Source;

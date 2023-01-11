@@ -9,6 +9,9 @@ using System.Windows.Media;
 
 namespace LogicMaster.gameplay.logic
 {
+    /// <summary>
+    /// Klasa modelujaca bramki logiczne
+    /// </summary>
     public abstract class LogicGate : LogicElement
     {
         public abstract string Name { get; }
@@ -20,7 +23,9 @@ namespace LogicMaster.gameplay.logic
         protected LogicElement?[] inputElements;
 
         protected List<LogicElement> outputElements = new List<LogicElement>();
-
+        /// <summary>
+        /// Funkcja odpowiadajaca za przeslanie stanu do bramki na podstawie poprzedniego
+        /// </summary>
         public override void HandleSignal()
         {
             State = GetOutputLogic();
@@ -30,7 +35,10 @@ namespace LogicMaster.gameplay.logic
                 logicElement.HandleSignal();
             }
         }
-
+        /// <summary>
+        /// Funkcja przylaczajaca bramke do inych elementow
+        /// </summary>
+        /// <param name="element">element do ktorego przylaczamy bramke</param>
         public override void AttachTo(LogicElement element)
         {
             if (element.HandleAttachment(this))
@@ -39,7 +47,11 @@ namespace LogicMaster.gameplay.logic
                 element.HandleSignal();
             }
         }
-
+        /// <summary>
+        /// Okreslanie stanu na wyjsciu po dolaczeniu elementu
+        /// </summary>
+        /// <param name="element">element ktory dolaczylismy</param>
+        /// <returns>stan na wyjsciu elementu</returns>
         public override bool HandleAttachment(LogicElement element)
         {
             for (int i = 0; i < inputElements.Length; i++)
@@ -52,7 +64,10 @@ namespace LogicMaster.gameplay.logic
             }
             return false;
         }
-
+        /// <summary>
+        /// Funkcja odlaczajaca bramke od elementu
+        /// </summary>
+        /// <param name="element">element od ktorego odlaczamy bramke</param>
         public override void DetachFrom(LogicElement element)
         {
             element.HandleDetachment(this);
@@ -66,7 +81,10 @@ namespace LogicMaster.gameplay.logic
             }
             outputElements.Remove(element);
         }
-
+        /// <summary>
+        /// Funkcja okreslajaca stan na wyjsciu po odlaczeniu elementu
+        /// </summary>
+        /// <param name="element">element od ktorego odlaczamy bramke</param>
         public override void HandleDetachment(LogicElement element)
         {
             for (int i = 0; i < inputElements.Length; i++)

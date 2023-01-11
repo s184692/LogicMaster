@@ -12,19 +12,29 @@ using System.Media;
 
 namespace LogicMaster.gui.dialog
 {
+    /// <summary>
+    /// Klasa nowego okna dialogowego
+    /// </summary>
     public class NewGameWindow : GateInfoWindow
     {
         private static readonly SoundPlayer clickSound = new SoundPlayer(@"resources/sounds/button_click.wav");
 
         public string Result { get; set; } = "";
-
+        /// <summary>
+        /// Tworzenie okna menu
+        /// </summary>
+        /// <param name="title">tytul gry</param>
+        /// <param name="options">opcje gry</param>
         public NewGameWindow(string title, string[] options) : base()
         {
             AddTitleRow(title, 5);
             foreach (string option in options)
                 AddOptionRow(option);
         }
-
+        /// <summary>
+        /// Funckja dodajaca pasek opcji
+        /// </summary>
+        /// <param name="option">opcja do wyboru</param>
         private void AddOptionRow(string option)
         {
             Grid optionRow = new Grid();

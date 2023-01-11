@@ -10,6 +10,9 @@ using LogicMaster.gameplay.logic;
 
 namespace LogicMaster.gameplay.logic.gates
 {
+    /// <summary>
+    /// Klasa bramek XOR
+    /// </summary>
     public class XOR : LogicGate
     {
         private static readonly ImageSource _imageSource = ((Image)Application.Current.FindResource("XORImage")).Source;

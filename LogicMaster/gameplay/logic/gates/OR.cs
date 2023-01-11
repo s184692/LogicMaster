@@ -10,6 +10,9 @@ using LogicMaster.gameplay.logic;
 
 namespace LogicMaster.gameplay.logic.gates
 {
+    /// <summary>
+    /// Klasa bramki OR
+    /// </summary>
     public class OR : LogicGate
     {
         private static readonly ImageSource _imageSource = ((Image)Application.Current.FindResource("ORImage")).Source;

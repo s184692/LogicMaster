@@ -41,7 +41,10 @@ namespace LogicMaster.gui.controls
             InitializeComponent();
             AllowDrop = true;
         }
-
+        /// <summary>
+        /// Konstruktor slotów do elementow logicznych
+        /// </summary>
+        /// <param name="element">element logiczny</param>
         public LogicContainer(LogicElement element)
         {
             InitializeComponent();
@@ -55,7 +58,11 @@ namespace LogicMaster.gui.controls
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(e.PropertyName));
             }
         }
-
+        /// <summary>
+        /// Funkcja przylaczajaca element
+        /// </summary>
+        /// <param name="container">miejsce na element</param>
+        /// <param name="asInput">czy jest to wejscie</param>
         public void ConnectTo(LogicContainer container, bool asInput = true)
         {
             if (asInput)
@@ -69,7 +76,12 @@ namespace LogicMaster.gui.controls
                 container.outputLogicContainers.Add(this);
             }
         }
-
+        /// <summary>
+        /// Funkcja umieszczającaelement logiczny w kontenerze
+        /// </summary>
+        /// <param name="element">jaki element logiczny</param>
+        /// <param name="allowDrop">zmienna opisujaca czy mozna upuscic element</param>
+        /// <param name="draggable">zmienna opisujaca czy element mozna przemiescic</param>
         public void SetAndAttachLogicElement(LogicElement element, bool allowDrop = false, bool draggable = false)
         {
             logicElement = element;
@@ -107,7 +119,9 @@ namespace LogicMaster.gui.controls
                     break;
             }
         }
-
+        /// <summary>
+        /// Funkcja usuwajaca element z poprzedniego polozenia
+        /// </summary>
         private void DetachAndRemoveLogicElement()
         {
             if (logicElement != null)

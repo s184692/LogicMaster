@@ -29,7 +29,9 @@ namespace LogicMaster
         private double windowInitialMinWidth;
         private MainMenu mainMenu { get; } = new MainMenu();
         private Game game { get; } = new Game();
-
+        /// <summary>
+        /// Konstruktor okna gry
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
@@ -40,7 +42,9 @@ namespace LogicMaster
 
             LoadMainMenu();
         }
-
+        /// <summary>
+        /// Funkcja uruchumiajaca menu glowne
+        /// </summary>
         public void LoadMainMenu()
         {
             if (game.GameStarted)
@@ -50,13 +54,18 @@ namespace LogicMaster
 
             contentFrame.Navigate(mainMenu);
         }
-
+        /// <summary>
+        /// Funkcja rozpoczynajaca nowa gre
+        /// </summary>
+        /// <param name="settings">ustawienia trudnosci gry</param>
         public void StartNewGame(GameSettings settings)
         {
             contentFrame.Navigate(game);
             game.LoadNewGame(settings);
         }
-
+        /// <summary>
+        /// Funkcja wznawiajaca gre
+        /// </summary>
         public void ContinueGame()
         {
             if (game.GameStarted)
@@ -65,7 +74,10 @@ namespace LogicMaster
                 game.ContinueGame();
             }
         }
-
+        /// <summary>
+        /// Funkcja zmieniajaca rozmiar okna
+        /// </summary>
+        /// <param name="sizeInfo">informacje o rozmiarze okna</param>
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
             base.OnRenderSizeChanged(sizeInfo);
@@ -76,7 +88,7 @@ namespace LogicMaster
             Width = targetWidth > sizeInfo.NewSize.Width ? targetWidth : sizeInfo.NewSize.Width;
             contentFrame.Width = targetWidth;
         }
-
+        
         private void Window_StateChanged(object sender, EventArgs e)
         {
             if (WindowState == WindowState.Normal)

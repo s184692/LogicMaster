@@ -28,7 +28,10 @@ namespace LogicMaster.gui.controls
             InitializeComponent();
             logicSource = null;
         }
-
+        /// <summary>
+        /// Konstruktor zrodla logicznego
+        /// </summary>
+        /// <param name="source">obiekt klasy LogicSource</param>
         public SourceObject(LogicSource source)
         {
             InitializeComponent();

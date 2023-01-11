@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace LogicMaster.gameplay.logic
 {
+    /// <summary>
+    /// Klasa po ktorej dziedzicza wszystkie elementy logiczne
+    /// </summary>
     public abstract class LogicElement : INotifyPropertyChanged
     {
         protected bool _state;
@@ -26,7 +29,7 @@ namespace LogicMaster.gameplay.logic
         public abstract void DetachAll();
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
+     
         public bool State
         {
             get

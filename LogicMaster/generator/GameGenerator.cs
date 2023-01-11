@@ -13,9 +13,14 @@ using System.Threading.Tasks;
 
 namespace LogicMaster.generator
 {
+    /// <summary>
+    /// Generator gry
+    /// </summary>
     public class GameGenerator
     {
-        // class for representing gate data during generating
+        /// <summary>
+        /// Klasa reprezentujaca dane bramek podczas generacji
+        /// </summary>
         private class Gate
         {
             public Type Type { get; set; }
@@ -47,7 +52,9 @@ namespace LogicMaster.generator
             }
         }
 
-        // class for representing logic data during generating
+        /// <summary>
+        /// Klasa reprezentujaca dane logiczne podczas generacji
+        /// </summary>
         private class Logic
         {
             public bool State { get; set; }
@@ -81,7 +88,11 @@ namespace LogicMaster.generator
             random = new Random(Seed);
             settings = gameSettings;
         }
-
+        /// <summary>
+        /// Konstruktor generatora gry
+        /// </summary>
+        /// <param name="gameSettings">ustawienia gry</param>
+        /// <param name="seed">ziarno generatora</param>
         public GameGenerator(GameSettings gameSettings, int seed)
         {
             Seed = seed;
@@ -95,6 +106,7 @@ namespace LogicMaster.generator
         // bool - what state should it be (needed for LogicSource)
         // bool - is output merged (whether output should be connected to one or two elements in layer above)
         // bool - is gate missing from circuit (fields for player to fill)
+       
         public List<List<(Type, int, bool, bool, bool)>> GenerateGameCircuit()
         {
             return PrepareLogicCircuit(GenerateLogicCircuit());

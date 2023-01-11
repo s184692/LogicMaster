@@ -61,7 +61,12 @@ namespace LogicMaster.gui.controls
         private string Title { get; set; } = "";
 
         private Type gateType { get; set; }
-
+        /// <summary>
+        /// Konstruktor okna wyposazenia gracza
+        /// </summary>
+        /// <param name="gate">rodzaj bramki</param>
+        /// <param name="column">numer kolumny</param>
+        /// <param name="row">numer wiersza</param>
         public GateInventoryBox(LogicGate gate, int column, int row)
         {
             InitializeComponent();
@@ -110,7 +115,10 @@ namespace LogicMaster.gui.controls
             Type sourceGateType = source.logicGate.GetType();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(sourceGateType.Name));
         }
-
+        /// <summary>
+        /// Funkcja zmieniajaca licznik ilosci elementow w slocie
+        /// </summary>
+        /// <param name="amount">zmienna okreslajaca pozostałą ilość bramek</param>
         public void SetAmountLabel(int amount)
         {
             amountLabel.Content = $"{amount}x";

@@ -10,6 +10,9 @@ using System.Windows.Media;
 
 namespace LogicMaster.gameplay.logic
 {
+    /// <summary>
+    /// Klasa modelujaca lampki na gorze ukladu
+    /// </summary>
     public class LogicTarget : LogicElement
     {
         private static readonly SolidColorBrush inactiveTargetColor = (SolidColorBrush)Application.Current.FindResource("TargetInactive");

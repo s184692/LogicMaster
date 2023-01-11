@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace LogicMaster.generator
 {
+    /// <summary>
+    /// Klasa reprezentujaca ustawienia gry
+    /// </summary>
     public class GameSettings
     {
         public enum DifficultyPresets { Easy, Medium, Hard };
@@ -26,7 +29,9 @@ namespace LogicMaster.generator
         private double _mergeChance; // complexity of circuit; chance of merging inputs between 2 gates
 
         private double _missingGates; // fraction of gates missing from circuit
-
+        /// <summary>
+        /// Ilosc lampek
+        /// </summary>
         public int TargetCount
         {
             get 
@@ -38,7 +43,9 @@ namespace LogicMaster.generator
                 _targetCount = Math.Clamp(value, TARGET_COUNT.MIN, TARGET_COUNT.MAX);
             }
         }
-
+        /// <summary>
+        /// Ilość warstw (zlozonosc ukladu)
+        /// </summary>
         public int LayerCount
         {
             get
@@ -50,7 +57,9 @@ namespace LogicMaster.generator
                 _layerCount = Math.Clamp(value, LAYER_COUNT.MIN, LAYER_COUNT.MAX);
             }
         }
-
+        /// <summary>
+        /// Szansa na polaczenie
+        /// </summary>
         public double MergeChance
         {
             get
@@ -62,7 +71,9 @@ namespace LogicMaster.generator
                 _mergeChance = Math.Clamp(value, MERGE_CHANCE.MIN, MERGE_CHANCE.MAX);
             }
         }
-
+        /// <summary>
+        /// Brakujace bramki
+        /// </summary>
         public double MissingGates
         {
             get
@@ -75,7 +86,8 @@ namespace LogicMaster.generator
             }
         }
 
-        // default constructor is also a medium difficulty preset
+        // default constructor is also a medium difficulty prese
+       
         public GameSettings()
         {
             TargetCount = (TARGET_COUNT.MIN + TARGET_COUNT.MAX) / 2;
@@ -83,7 +95,10 @@ namespace LogicMaster.generator
             MissingGates = (MISSING_GATES.MIN + MISSING_GATES.MAX) / 2;
             MergeChance = (MERGE_CHANCE.MIN + MERGE_CHANCE.MAX) / 2;
         }
-
+        /// <summary>
+        /// Konstruktor ustawien gry
+        /// </summary>
+        /// <param name="preset">wybrany poziom trudnosci</param>
         public GameSettings(DifficultyPresets preset) : this()
         {
             switch (preset)

@@ -10,6 +10,9 @@ using LogicMaster.gameplay.logic;
 
 namespace LogicMaster.gameplay.logic.gates
 {
+    /// <summary>
+    /// Klasa bramki BUF
+    /// </summary>
     public class BUF : LogicGate
     {
         private static readonly ImageSource _imageSource = ((Image)Application.Current.FindResource("BUFImage")).Source;

@@ -21,7 +21,10 @@ namespace LogicMaster.gui.dialog
     public partial class GameWonWindow : Window
     {
         private static readonly SoundPlayer clickSound = new SoundPlayer(@"resources/sounds/button_click.wav");
-
+        /// <summary>
+        /// Konstruktor okna z informacja o wygraniu gry
+        /// </summary>
+        /// <param name="time">czas rozgrywki</param>
         public GameWonWindow(int time)
         {
             InitializeComponent();
